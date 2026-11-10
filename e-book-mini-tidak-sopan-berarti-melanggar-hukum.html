@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<!-- Rak E-Book Mini KataPasal — diterbitkan ulang 10 November 2026 (Buku 08 ditambahkan) -->
+<link rel="icon" href="data:," />
+<title>Rak E-Book Mini KataPasal — Delapan E-Book Pendamping Video</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f4f0; --surface:#ffffff; --surface-2:#eceee8; --ink:#17201b; --ink-2:#46524a;
+    --line:#d8dcd2; --accent:#1b4332; --accent-ink:#ffffff; --amber:#b97f16; --brick:#a63d22;
+    --chip:#e3e9df; --quote-bg:#1b4332; --quote-ink:#f2ead8; --warn-bg:#fdf3e0; --warn-line:#e3c98a;
+    --shadow:0 10px 30px rgba(23,32,27,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#111512; --surface:#1a1f1b; --surface-2:#222822; --ink:#eef1ec; --ink-2:#b6bfb5;
+      --line:#333b34; --accent:#7fc8a0; --accent-ink:#0e1a13; --amber:#e0aa3e; --brick:#e08a6d;
+      --chip:#253129; --quote-bg:#0d2b1d; --quote-ink:#f2ead8; --warn-bg:#2b2413; --warn-line:#6b5a26;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;font-size:16.5px;line-height:1.65}
+  h1,h2,h3,.serif{font-family:"Newsreader",Georgia,serif;line-height:1.15;margin:0}
+  a{color:var(--accent);text-underline-offset:3px}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px 72px}
+
+  /* ---------- top strip ---------- */
+  .strip{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:16px 0 0;font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+  .strip .brand{color:var(--ink);font-size:14px;letter-spacing:.14em}
+  .strip .brand b{color:var(--brick)}
+
+  /* ---------- tombol podcast (paling atas) ---------- */
+  .podcast-cta{margin-top:26px}
+  .podcast-btn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:19px 24px;border-radius:14px;background:#6d1f24;color:#f7ecd2;border:2px solid #c99a2e;font-family:"Newsreader",Georgia,serif;font-size:clamp(21px,3.4vw,27px);font-weight:700;text-decoration:none;text-align:center;box-shadow:0 12px 28px rgba(109,31,36,.28);transition:transform .15s,box-shadow .15s,background .15s}
+  .podcast-btn:hover{background:#7d262c;transform:translateY(-2px);box-shadow:0 16px 32px rgba(109,31,36,.34)}
+  .podcast-btn:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+  .podcast-btn .note-icon{font-size:1.15em;line-height:1}
+  .podcast-note{margin:10px 4px 0;text-align:center;font-size:14px;color:var(--ink-2)}
+  @media (prefers-color-scheme: dark){
+    .podcast-btn{background:#7d262c;border-color:#e0aa3e;color:#fdf3dc;box-shadow:0 12px 28px rgba(0,0,0,.45)}
+    .podcast-btn:hover{background:#8c2f36}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:30px 0 8px;max-width:760px}
+  .hero h1{font-size:clamp(32px,5.4vw,52px);font-weight:700}
+  .hero h1 em{font-style:italic;color:var(--accent)}
+  .hero p{color:var(--ink-2);font-size:17.5px;margin:14px 0 0;max-width:640px}
+
+  /* ---------- shelf / switcher ---------- */
+  .shelf{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:30px 0 8px}
+  .book-btn{text-align:left;border:2px solid var(--line);background:var(--surface);border-radius:14px;padding:20px 20px 18px;cursor:pointer;font:inherit;color:var(--ink);box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+  .book-btn:hover{transform:translateY(-2px)}
+  .book-btn[aria-selected="true"]{border-color:var(--accent)}
+  .book-btn .no{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--brick)}
+  .book-btn h2{font-size:clamp(21px,3vw,27px);margin:8px 0 6px}
+  .book-btn p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.55}
+  .book-btn .meta{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:12px;font-weight:700;background:var(--chip);color:var(--ink);border-radius:999px;padding:3px 10px}
+  .reading{display:none}
+  .reading.active{display:block}
+
+  /* ---------- book interior ---------- */
+  .cover{margin-top:26px;background:var(--quote-bg);color:var(--quote-ink);border-radius:16px;padding:clamp(24px,4vw,44px)}
+  .cover .kick{font-size:12.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+  .cover h2{font-size:clamp(27px,4.4vw,42px);margin:12px 0 10px}
+  .cover p{margin:0;opacity:.88;max-width:620px}
+  .cover blockquote{margin:22px 0 0;padding:16px 20px;border-left:4px solid var(--amber);background:rgba(255,255,255,.06);border-radius:0 10px 10px 0;font-family:"Newsreader",Georgia,serif;font-size:clamp(19px,2.6vw,24px);font-style:italic}
+  .cover blockquote footer{font-family:"Public Sans",sans-serif;font-style:normal;font-size:13.5px;margin-top:8px;opacity:.8}
+  section{margin-top:44px}
+  section>h3{font-size:clamp(23px,3.2vw,30px);margin-bottom:8px}
+  section>.lead{color:var(--ink-2);margin:0 0 18px;max-width:680px}
+  .prose p{margin:0 0 14px;max-width:720px}
+  .prose strong{color:var(--ink)}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 6px;font-size:17px;font-family:"Public Sans",sans-serif;font-weight:800}
+  .card p{margin:0;color:var(--ink-2);font-size:15px}
+  .card .num{display:inline-block;font-family:"Newsreader",serif;font-size:26px;font-weight:700;color:var(--brick);margin-bottom:6px}
+  .card .sanction{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink)}
+  .card .sanction b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:2px}
+
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:15px}
+  th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:var(--surface-2);font-size:12.5px;letter-spacing:.07em;text-transform:uppercase}
+  tr:last-child td{border-bottom:none}
+  td.pasal{font-weight:800;white-space:nowrap;color:var(--accent)}
+  .tablewrap{overflow:hidden;border-radius:14px;box-shadow:var(--shadow)}
+  .scrollhint{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+
+  .callout{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:14px;padding:18px 20px}
+  .callout h4{margin:0 0 6px;font-size:16px}
+  .callout p{margin:0;font-size:15px;color:var(--ink-2)}
+  .keyline{margin-top:44px;background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:clamp(20px,3.4vw,32px);text-align:center}
+  .keyline .kick{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brick)}
+  .keyline p{font-family:"Newsreader",serif;font-size:clamp(22px,3.6vw,32px);font-weight:600;margin:10px 0 0;line-height:1.3}
+
+  /* checklist (styled list, bukan checkbox) */
+  .steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .steps li{display:flex;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .steps .n{flex:none;width:36px;height:36px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:800}
+  .steps b{display:block}
+  .steps span{color:var(--ink-2);font-size:15px}
+
+  /* interactive checker */
+  .checker{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,3.4vw,30px);box-shadow:var(--shadow)}
+  .checker h4{margin:0 0 4px;font-size:19px;font-family:"Newsreader",serif}
+  .checker>p{margin:0 0 16px;color:var(--ink-2);font-size:15px}
+  .scenarios{display:flex;flex-wrap:wrap;gap:8px}
+  .scen{border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:9px 15px;font:inherit;font-size:14.5px;font-weight:600;cursor:pointer}
+  .scen:hover{border-color:var(--accent)}
+  .scen[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .result{margin-top:18px;border-top:1px dashed var(--line);padding-top:16px;display:none}
+  .result.show{display:block}
+  .result .verdict{font-weight:800;font-size:17px;margin-bottom:4px}
+  .result p{margin:0;color:var(--ink-2);font-size:15px}
+
+  .src{font-size:14px;color:var(--ink-2)}
+  .src li{margin-bottom:6px}
+  .disclaimer{margin-top:52px;border-top:2px solid var(--line);padding-top:20px;color:var(--ink-2);font-size:14px;max-width:760px}
+  .disclaimer b{color:var(--ink)}
+  .fin{text-align:center;font-family:"Newsreader",serif;font-style:italic;color:var(--ink-2);margin-top:36px;font-size:18px}
+
+  /* ---------- sambutan + peta seri (Buku 01) ---------- */
+  .welcome{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,3.6vw,34px);box-shadow:var(--shadow)}
+  .welcome .kick{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brick)}
+  .welcome h3{font-size:clamp(24px,3.4vw,32px);margin:10px 0 12px;max-width:640px}
+  .welcome p{margin:0 0 12px;color:var(--ink-2);max-width:700px}
+  .welcome p strong{color:var(--ink)}
+  .welcome-note{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:flex;gap:12px;align-items:flex-start}
+  .welcome-note .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--amber);margin-top:8px}
+  .welcome-note p{margin:0;font-size:15px}
+  .series-map{margin-top:40px}
+  .map-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:relative}
+  .map-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .map-card.is-current{border:2px solid var(--accent);padding:19px}
+  .map-card .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+  .map-card .no{font-family:"Newsreader",serif;font-size:28px;font-weight:700;color:var(--brick);line-height:1}
+  .map-badge{font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:4px 9px;white-space:nowrap}
+  .map-badge.ghost{background:var(--chip);color:var(--ink)}
+  .map-card h4{margin:0 0 6px;font-size:17.5px;font-family:"Newsreader",serif;line-height:1.25}
+  .map-card p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.6;flex:1}
+  .map-card .role{margin-top:12px;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+  .map-link{margin-top:14px;align-self:flex-start;border:none;background:none;padding:0;font:inherit;font-size:14.5px;font-weight:700;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+  .map-link:hover{opacity:.85}
+  .map-arrow{display:none}
+
+  @media (max-width:760px){
+    .shelf,.grid3,.grid2,.map-grid{grid-template-columns:1fr}
+    .welcome-note{flex-direction:row}
+    /* tabel lebar ditumpuk jadi kartu, bukan digeser menyamping */
+    table,tbody,tr,td{display:block;width:100%}
+    thead{display:none}
+    tr{border-bottom:2px solid var(--line);padding:8px 2px}
+    tbody tr:last-child{border-bottom:none}
+    td{border-bottom:none;padding:5px 14px;font-size:14.5px}
+    td:first-child{font-weight:700;font-size:15.5px}
+    td.pasal{white-space:normal}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="strip">
+    <span class="brand">KATA<b>PASAL</b></span>
+    <span>Rak E-Book Mini · Pendamping Video</span>
+    <span>Berlaku per November 2026</span>
+  </div>
+
+  <div class="podcast-cta">
+    <a class="podcast-btn" href="https://open.spotify.com/show/0QGuigLKD534qSmB44bpbY" target="_blank" rel="noopener"><span class="note-icon" aria-hidden="true">🎧</span> Dengarkan Podcast di Spotify</a>
+    <p class="podcast-note">Podcast Kabar Hukum tayang tiap hari — cari Kata Pasal di Spotify, tekan Ikuti.</p>
+  </div>
+
+  <header class="hero">
+    <h1>Delapan video, delapan <em>e-book mini</em> pendampingnya.</h1>
+    <p>Video KataPasal memang sengaja ringkas. Di sinilah pembahasan lengkapnya: dasar pasalnya, cara membedakannya, dan alat cek cepat yang bisa kamu pakai sendiri. Pilih bukunya untuk mulai membaca — Buku 08 adalah pendamping konten terbaru.</p>
+  </header>
+
+  <!-- ================= SHELF ================= -->
+  <div class="shelf" role="tablist" aria-label="Pilih e-book">
+    <button class="book-btn" id="btn-book1" role="tab" aria-selected="false" aria-controls="book1" onclick="openBook(1)">
+      <span class="no">E-BOOK 01 · KONTEN PERTAMA</span>
+      <h2>Indonesia adalah Negara Hukum</h2>
+      <p>Apa sebenarnya arti satu kalimat di Pasal 1 ayat (3) UUD 1945 itu — dan apa bedanya dengan negara yang dikendalikan kekuasaan semata.</p>
+      <span class="meta"><span class="tag">UUD 1945 Pasal 1 ayat (3)</span><span class="tag">±3 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book2" role="tab" aria-selected="false" aria-controls="book2" onclick="openBook(2)">
+      <span class="no">E-BOOK 02 · KONTEN KEDUA</span>
+      <h2>Tidak Sopan, Berarti Melanggar Hukum?</h2>
+      <p>Memotong pembicaraan itu bikin kesal — tapi apakah otomatis melanggar hukum? Bedah tiga lensanya: sopan santun, etika, dan hukum.</p>
+      <span class="meta"><span class="tag">Tiga Lensa</span><span class="tag">UU Advokat Pasal 26</span><span class="tag">±4 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book3" role="tab" aria-selected="false" aria-controls="book3" onclick="openBook(3)">
+      <span class="no">E-BOOK 03 · KONTEN KETIGA</span>
+      <h2>Chat Kasar di Grup, Bisa Dipolisikan?</h2>
+      <p>Menuduh orang di grup WhatsApp memang bisa berujung pidana — tapi tidak semua kata kasar begitu. Sejak 2 Januari 2026 aturannya pindah ke KUHP baru.</p>
+      <span class="meta"><span class="tag">KUHP Pasal 433–441</span><span class="tag">Delik Aduan</span><span class="tag">±6 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book4" role="tab" aria-selected="false" aria-controls="book4" onclick="openBook(4)">
+      <span class="no">E-BOOK 04 · KONTEN KEEMPAT</span>
+      <h2>Utang Tidak Dibayar, Bisa Dipenjara?</h2>
+      <p>Gagal bayar utang pada dasarnya adalah ingkar janji — wanprestasi — dan itu urusan perdata, bukan pidana. Yang bisa berubah menjadi pidana adalah bila sejak awal ada niat menipu.</p>
+      <span class="meta"><span class="tag">KUHP Pasal 492</span><span class="tag">Wanprestasi</span><span class="tag">±5 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book5" role="tab" aria-selected="false" aria-controls="book5" onclick="openBook(5)">
+      <span class="no">E-BOOK 05 · KONTEN KELIMA</span>
+      <h2>Jualan Online Dipotong 0,5%, Ini Pajak Baru?</h2>
+      <p>Saldo masuk, eh, sudah kepotong duluan. Potongannya nyata — tapi pajaknya bukan pajak baru. Yang berubah adalah siapa yang memungut: sekarang marketplace, bukan penjual setor sendiri.</p>
+      <span class="meta"><span class="tag">PPh Pasal 22</span><span class="tag">PMK 37/2025</span><span class="tag">±5 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book6" role="tab" aria-selected="false" aria-controls="book6" onclick="openBook(6)">
+      <span class="no">E-BOOK 06 · KONTEN KEENAM</span>
+      <h2>Cuma Main Judol, Bisa Masuk Penjara Juga?</h2>
+      <p>Kedengarannya sepele: cuma ikut main, bukan yang buka lapak. Tapi jawabannya tegas: bisa. Dalam KUHP baru, yang dipidana bukan cuma bandarnya — pemain judi tanpa izin pun ada pasalnya sendiri.</p>
+      <span class="meta"><span class="tag">Pasal 427</span><span class="tag">UU 1/2023</span><span class="tag">±5 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book7" role="tab" aria-selected="false" aria-controls="book7" onclick="openBook(7)">
+      <span class="no">E-BOOK 07 · KONTEN KETUJUH</span>
+      <h2>Sudah Terlanjur Transfer ke Penipu, Uangnya Masih Bisa Balik?</h2>
+      <p>Rasanya nyesek banget: uang sudah melayang, penipunya hilang. Jawabannya: bisa — tapi tidak selalu, dan tidak selalu penuh. Uang hanya kembali kalau dananya masih ada di rekening penipu saat diblokir — dan itu ditentukan satu hal: kecepatan lapor.</p>
+      <span class="meta"><span class="tag">IASC</span><span class="tag">Pasal 492 UU 1/2023</span><span class="tag">±5 menit baca</span></span>
+    </button>
+    <button class="book-btn" id="btn-book8" role="tab" aria-selected="true" aria-controls="book8" onclick="openBook(8)">
+      <span class="no">E-BOOK 08 · KONTEN KEDELAPAN</span>
+      <h2>Di Struk Tertulis “Barang Tidak Dapat Dikembalikan” — Tulisan Itu Sah?</h2>
+      <p>Belanja 11.11, barangnya cacat, toko malah nunjuk tulisan di struk: “barang tidak dapat dikembalikan”. Rasanya nyebelin — tapi jawabannya jelas: tulisan itu tidak berlaku. Klausul seperti itu dilarang undang-undang, dan dinyatakan batal demi hukum.</p>
+      <span class="meta"><span class="tag">Terbaru</span><span class="tag">Klausula baku</span><span class="tag">UU 8/1999</span><span class="tag">±5 menit baca</span></span>
+    </button>
+  </div>
+
+  <!-- ================= BOOK 1 ================= -->
+  <article class="reading" id="book1" role="tabpanel" aria-labelledby="btn-book1">
+    <div class="cover">
+      <span class="kick">E-Book Mini 01 · KataPasal</span>
+      <h2>Indonesia adalah Negara Hukum</h2>
+      <p>Satu kalimat pendek di konstitusi yang menentukan siapa yang sebenarnya berkuasa di negeri ini: hukumnya, atau orangnya?</p>
+      <blockquote>
+        “Negara Indonesia adalah negara hukum.”
+        <footer>— Pasal 1 ayat (3) UUD Negara Republik Indonesia Tahun 1945</footer>
+      </blockquote>
+    </div>
+
+    <div class="welcome">
+      <span class="kick">Sambutan · Untuk kamu yang baru datang</span>
+      <h3>Baru datang dari videonya? Kamu di tempat yang benar.</h3>
+      <p>Kalau kamu sampai di sini dari video pertama KataPasal — <strong>“Indonesia adalah negara hukum”</strong> — halaman ini adalah versi lengkapnya. Videonya berhenti di kalimat inti; di sini kamu dapat tiang-tiangnya, pasal-pasal jangkarnya, dan cek cepat untuk membedakan sendiri mana negara hukum dan mana negara kekuasaan.</p>
+      <p>Buku ini adalah <strong>fondasinya</strong>. Semua buku berikutnya di rak ini berdiri di atasnya: sebelum bertanya “ini melanggar hukum atau sekadar tidak sopan?” dan “chat kasar ini bisa dipidana atau tidak?”, kita mulai dari pertanyaan paling dasar — siapa yang sebenarnya berkuasa, hukumnya atau orangnya?</p>
+      <div class="welcome-note">
+        <span class="dot" aria-hidden="true"></span>
+        <p><strong>Ini seri yang berlanjut, bukan halaman sekali baca.</strong> Rak ini akan terus bertambah mengikuti video berikutnya. Simpan tautan raknya, dan ikuti KataPasal supaya buku pendamping video selanjutnya tidak terlewat.</p>
+      </div>
+    </div>
+
+    <section class="series-map" aria-label="Peta seri e-book KataPasal">
+      <h3>Peta seri — baca berurutan, atau lompat ke yang kamu butuhkan</h3>
+      <p class="lead">Delapan buku, satu alur berpikir: dari fondasi negara hukum, ke cara membedakan sopan dan hukum, penerapannya di chat sehari-hari, lalu ke soal utang dan janji bayar, pungutan pajak di marketplace, pidana judi online yang menyentuh pemainnya, pengembalian dana korban penipuan yang ditentukan kecepatan lapor, dan klausul “tidak dapat dikembalikan” di struk belanja yang ternyata batal demi hukum.</p>
+      <div class="map-grid">
+        <article class="map-card is-current">
+          <div class="top"><span class="no">01</span><span class="map-badge">Kamu di sini</span></div>
+          <h4>Indonesia adalah Negara Hukum</h4>
+          <p>Pasal 1 ayat (3) UUD 1945, empat tiang negara hukum, dan bedanya dengan negara kekuasaan.</p>
+          <span class="role">Fondasi</span>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">02</span><span class="map-badge ghost">Lanjutan</span></div>
+          <h4>Tidak Sopan, Berarti Melanggar Hukum?</h4>
+          <p>Membedakan tiga lensa — sopan santun, etika, dan hukum — supaya tidak salah menyimpulkan hanya dari rasa kesal.</p>
+          <span class="role">Cara membedakan</span>
+          <button class="map-link" onclick="openBook(2)">Buka Buku 02 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">03</span><span class="map-badge ghost">Penerapan</span></div>
+          <h4>Chat Kasar di Grup, Bisa Dipolisikan?</h4>
+          <p>Penerapannya di grup WhatsApp: tuduhan, makian, kritik, delik aduan, dan pasal-pasal KUHP baru yang bekerja sejak 2026.</p>
+          <span class="role">Kasus sehari-hari</span>
+          <button class="map-link" onclick="openBook(3)">Buka Buku 03 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">04</span><span class="map-badge ghost">Penerapan</span></div>
+          <h4>Utang Tidak Dibayar, Bisa Dipenjara?</h4>
+          <p>Beda wanprestasi dan penipuan ada pada niat di awal: gagal bayar itu perdata, menipu sejak awal bisa pidana — plus jalur gugatan sederhana untuk menagih.</p>
+          <span class="role">Utang &amp; janji bayar</span>
+          <button class="map-link" onclick="openBook(4)">Buka Buku 04 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">05</span><span class="map-badge ghost">Penerapan</span></div>
+          <h4>Jualan Online Dipotong 0,5%, Ini Pajak Baru?</h4>
+          <p>Bukan pajak baru — yang berubah adalah cara pungutnya: marketplace memungut PPh Pasal 22 sebesar 0,5% dari omzet penjual, dan potongan itu adalah pajak penjual sendiri.</p>
+          <span class="role">Pajak &amp; usaha</span>
+          <button class="map-link" onclick="openBook(5)">Buka Buku 05 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">06</span><span class="map-badge ghost">Penerapan</span></div>
+          <h4>Cuma Main Judol, Bisa Masuk Penjara Juga?</h4>
+          <p>Bukan cuma bandar yang dipidana: pemain judi tanpa izin pun ada pasalnya sendiri di KUHP baru — Pasal 427, ancaman sampai 3 tahun atau denda Rp50 juta, dan tidak ditahan bukan berarti bebas.</p>
+          <span class="role">Pidana sehari-hari</span>
+          <button class="map-link" onclick="openBook(6)">Buka Buku 06 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">07</span><span class="map-badge ghost">Penerapan</span></div>
+          <h4>Sudah Terlanjur Transfer ke Penipu, Uangnya Masih Bisa Balik?</h4>
+          <p>Bisa — tapi tidak selalu, dan tidak selalu penuh. Uang hanya kembali kalau dananya masih ada di rekening penipu saat diblokir; dari Rp967,5 miliar yang diblokir, baru Rp208,9 miliar yang kembali, dan penentunya adalah kecepatan lapor ke IASC plus laporan polisi.</p>
+          <span class="role">Penipuan &amp; dana korban</span>
+          <button class="map-link" onclick="openBook(7)">Buka Buku 07 →</button>
+        </article>
+        <article class="map-card">
+          <div class="top"><span class="no">08</span><span class="map-badge">Terbaru</span></div>
+          <h4>Di Struk Tertulis “Barang Tidak Dapat Dikembalikan” — Tulisan Itu Sah?</h4>
+          <p>Tidak berlaku. Klausul “tidak dapat dikembalikan” itu klausula baku yang dilarang Pasal 18 UU 8/1999 dan dinyatakan batal demi hukum — tapi refund tetap butuh alasan: barang cacat, rusak, atau tidak sesuai pesanan (Pasal 19), bukan sekadar berubah pikiran.</p>
+          <span class="role">Belanja &amp; perlindungan konsumen</span>
+          <button class="map-link" onclick="openBook(8)">Buka Buku 08 →</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h3>Kalimatnya pendek, akibatnya panjang</h3>
+      <p>Sebelum diamendemen, gagasan ini hanya hidup di Penjelasan UUD 1945: Indonesia adalah negara yang berdasar atas hukum (<em>rechtsstaat</em>), bukan berdasar atas kekuasaan belaka (<em>machtsstaat</em>). Perubahan Ketiga UUD 1945 tahun 2001 mengangkatnya masuk ke batang tubuh sebagai Pasal 1 ayat (3) — menjadikannya janji konstitusional yang mengikat semua orang, termasuk yang sedang memegang kekuasaan.</p>
+      <p>Artinya sederhana tapi keras: <strong>tidak ada tindakan penguasa maupun warga yang berdiri di atas hukum.</strong> Pemerintah memerintah karena hukum memberi wewenang, dan wewenang itu berhenti tepat di batas yang ditentukan hukum.</p>
+    </section>
+
+    <section>
+      <h3>Empat tiang negara hukum</h3>
+      <p class="lead">Dari satu kalimat Pasal 1 ayat (3), para ahli dan bunyi UUD sendiri menurunkan empat tiang utamanya:</p>
+      <div class="grid2">
+        <div class="card"><span class="num">1</span><h4>Supremasi hukum</h4><p>Yang tertinggi adalah hukum, bukan jabatan, bukan popularitas, bukan kekuatan. Setiap keputusan negara harus bisa ditunjuk dasar hukumnya.</p></div>
+        <div class="card"><span class="num">2</span><h4>Persamaan di hadapan hukum</h4><p>Semua warga bersamaan kedudukannya di dalam hukum dan pemerintahan, tanpa kecuali — Pasal 27 ayat (1) dan Pasal 28D ayat (1) UUD 1945. Jabatan tidak menciptakan kekebalan.</p></div>
+        <div class="card"><span class="num">3</span><h4>Peradilan yang merdeka dan adil</h4><p>Kekuasaan kehakiman adalah kekuasaan yang merdeka untuk menegakkan hukum dan keadilan — Pasal 24 ayat (1) UUD 1945. Hakim memutus berdasarkan hukum dan bukti, bukan tekanan.</p></div>
+        <div class="card"><span class="num">4</span><h4>Kekuasaan dibatasi hukum</h4><p>Penguasa hanya boleh bertindak dalam batas wewenang yang diberikan peraturan. Di luar itu, tindakannya bisa diuji dan dibatalkan lewat mekanisme hukum.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Negara hukum vs negara kekuasaan</h3>
+      <p class="lead">Cara tercepat merasakan bedanya: bandingkan dua kolom ini.</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:26%">Hal</th><th style="width:37%">Negara Hukum (rechtsstaat)</th><th>Negara Kekuasaan (machtsstaat)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Sumber kekuasaan</b></td><td>Hukum dan konstitusi</td><td>Keinginan pemegang kekuasaan</td></tr>
+          <tr><td><b>Posisi penguasa</b></td><td>Tunduk pada hukum, bisa digugat dan diadili</td><td>Berada di atas hukum, praktis kebal</td></tr>
+          <tr><td><b>Posisi warga</b></td><td>Punya hak yang dijamin dan bisa dituntut perlindungannya</td><td>Hak tergantung belas kasihan penguasa</td></tr>
+          <tr><td><b>Sengketa diselesaikan</b></td><td>Di peradilan yang merdeka, dengan proses yang adil</td><td>Dengan kekuatan dan kedekatan pada kekuasaan</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <h3>Jangkar pasalnya</h3>
+      <p class="lead">Pasal 1 ayat (3) tidak berdiri sendiri. Ini pasal-pasal yang menopangnya langsung:</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:22%">Pasal</th><th style="width:40%">Bunyinya (inti)</th><th>Fungsinya</th></tr></thead>
+        <tbody>
+          <tr><td class="pasal">UUD 1945 · 1 ayat (3)</td><td>“Negara Indonesia adalah negara hukum.”</td><td>Pernyataan dasarnya — fondasi seluruh tatanan.</td></tr>
+          <tr><td class="pasal">UUD 1945 · 27 ayat (1)</td><td>Segala warga negara bersamaan kedudukannya di dalam hukum dan pemerintahan, dan wajib menjunjungnya “dengan tidak ada kecualinya”.</td><td>Jaminan persamaan — tidak ada warga kelas dua di hadapan hukum.</td></tr>
+          <tr><td class="pasal">UUD 1945 · 28D ayat (1)</td><td>Setiap orang berhak atas kepastian hukum yang adil serta perlakuan yang sama di hadapan hukum.</td><td>Mengubah persamaan itu menjadi hak yang bisa dituntut setiap orang.</td></tr>
+          <tr><td class="pasal">UUD 1945 · 24 ayat (1)</td><td>Kekuasaan kehakiman merupakan kekuasaan yang merdeka untuk menyelenggarakan peradilan guna menegakkan hukum dan keadilan.</td><td>Penjaganya — peradilan yang bebas dari campur tangan kekuasaan lain.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: ini negara hukum, atau negara kekuasaan?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Baca tiap situasi, lalu lihat tiang mana yang sedang diuji.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook1(this,'kebal')">Seorang pejabat menolak diperiksa karena merasa jabatannya melindunginya</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook1(this,'tekan')">Penguasa menelepon hakim meminta putusan tertentu</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook1(this,'gugat')">Warga biasa menggugat keputusan pemerintah — dan menang</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook1(this,'aturan')">Pemerintah menerbitkan aturan baru yang berlaku juga untuk pemerintah sendiri</button>
+        </div>
+        <div class="result" id="result1">
+          <div class="verdict" id="verdict1"></div>
+          <p id="desc1"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 1</span>
+      <p>Di negara hukum, yang berkuasa adalah hukumnya — bukan orangnya.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>UUD Negara Republik Indonesia Tahun 1945 — Pasal 1 ayat (3), Pasal 24 ayat (1), Pasal 27 ayat (1), dan Pasal 28D ayat (1).</li>
+        <li>Penjelasan UUD 1945 (naskah asli) — rumusan <em>rechtsstaat</em> versus <em>machtsstaat</em> yang kemudian ditegaskan dalam Perubahan Ketiga UUD 1945 (2001).</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 2 ================= -->
+  <article class="reading" id="book2" role="tabpanel" aria-labelledby="btn-book2">
+    <div class="cover">
+      <span class="kick">E-Book Mini 02 · KataPasal</span>
+      <h2>Tidak Sopan, Berarti Melanggar Hukum?</h2>
+      <p>Memotong pembicaraan bisa bikin kesal. Tapi untuk menyimpulkan ada pelanggaran hukum, kita perlu mengecek tindakannya, konteksnya, dan aturan yang berlaku — bukan hanya rasa kesalnya.</p>
+      <blockquote>
+        “Tidak dilarang hukum, belum tentu etis.”
+        <footer>— Kalimat inti konten kedua KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Kenapa kita gampang mencampurnya?</h3>
+      <p>Karena ketiganya terasa mirip: sama-sama bilang “ini tidak pantas”. Padahal <strong>sopan santun, etika, dan hukum adalah tiga lensa berbeda</strong> — sumber aturannya beda, yang menegakkannya beda, dan sanksinya pun beda. Satu perbuatan bisa lolos di satu lensa dan kena di lensa lainnya. Supaya tidak salah simpulan, pisahkan dulu ketiganya.</p>
+    </section>
+
+    <section>
+      <h3>Tiga lensa, tiga sanksi</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">A</span><h4>Sopan Santun</h4>
+          <p>Norma yang hidup di masyarakat: tata krama, kesantunan, kepantasan. Tidak tertulis dalam undang-undang, tapi semua orang merasakannya.</p>
+          <div class="sanction"><b>Sanksinya</b>Teguran, dicap tidak sopan, dijauhi, kehilangan kepercayaan orang sekitar.</div>
+        </div>
+        <div class="card">
+          <span class="num">B</span><h4>Etika &amp; Kode Etik</h4>
+          <p>Aturan tertulis milik profesi atau organisasi: kode etik advokat, dokter, guru, jurnalis, sampai tata tertib kantor dan kampus.</p>
+          <div class="sanction"><b>Sanksinya</b>Pemeriksaan dan sanksi dari organisasi atau dewan kehormatannya — teguran sampai pencabutan izin praktik profesi.</div>
+        </div>
+        <div class="card">
+          <span class="num">C</span><h4>Hukum</h4>
+          <p>Peraturan perundang-undangan yang dibuat negara dan berlaku untuk semua orang, dengan unsur dan syarat yang dirumuskan tertulis.</p>
+          <div class="sanction"><b>Sanksinya</b>Sanksi negara lewat proses hukum: denda, ganti rugi, sampai pidana — setelah unsur pasalnya terbukti.</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <h4>Ketiganya bisa beririsan</h4>
+        <p>Satu perbuatan dapat sekaligus tidak sopan, melanggar kode etik, <em>dan</em> melanggar hukum. Tapi irisan itu harus dibuktikan lensa per lensa — bukan diasumsikan. Merasa tersinggung adalah sinyal untuk memeriksa, bukan kesimpulan hukum.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Contoh nyata lensa etika: advokat</h3>
+      <p class="lead">Profesi advokat punya kode etiknya sendiri, dan undang-undang yang memerintahkannya bukan undang-undang pidana — melainkan UU Advokat:</p>
+      <div class="cover" style="margin-top:0">
+        <blockquote style="margin-top:0">
+          “Untuk menjaga martabat dan kehormatan profesi Advokat, disusun kode etik profesi Advokat oleh Organisasi Advokat. Advokat wajib tunduk dan mematuhi kode etik profesi Advokat…”
+          <footer>— UU No. 18 Tahun 2003 tentang Advokat, Pasal 26 ayat (1) dan (2)</footer>
+        </blockquote>
+      </div>
+      <div class="prose" style="margin-top:18px">
+        <p>Pasal 26 ayat (4) dan (5) melanjutkan: pengawasan kode etik dilakukan oleh Organisasi Advokat, dan <strong>Dewan Kehormatan</strong> yang memeriksa serta mengadili pelanggarannya. Jadi advokat yang berperilaku tidak pantas dalam profesinya diproses dulu lewat jalur etik organisasinya.</p>
+        <p>Ada satu jembatan penting di ayat (6): keputusan Dewan Kehormatan <strong>tidak menghilangkan tanggung jawab pidana</strong> apabila pelanggaran etik itu juga mengandung unsur pidana. Artinya jalur etik dan jalur hukum berjalan masing-masing — yang satu tidak meniadakan yang lain, tapi keduanya harus dibuktikan dengan unsurnya sendiri-sendiri.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Ukur dengan contoh</h3>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:34%">Perbuatan</th><th style="width:22%">Tidak sopan?</th><th style="width:22%">Langgar etika?</th><th>Langgar hukum?</th></tr></thead>
+        <tbody>
+          <tr><td>Memotong pembicaraan orang lain</td><td>Ya, umumnya</td><td>Tergantung konteks (mis. tata tertib rapat)</td><td>Umumnya tidak — tidak ada pasal yang dilanggar hanya karena memotong</td></tr>
+          <tr><td>Tidak menyapa dan bersikap dingin</td><td>Bisa dinilai begitu</td><td>Umumnya tidak</td><td>Tidak</td></tr>
+          <tr><td>Advokat melanggar kode etik profesinya</td><td>Mungkin</td><td>Ya — diproses Dewan Kehormatan (Pasal 26 UU Advokat)</td><td>Belum tentu — kecuali perbuatannya juga mengandung unsur pidana</td></tr>
+          <tr><td>Menuduh orang melakukan kejahatan tanpa dasar</td><td>Ya</td><td>Seringkali ya</td><td>Perlu dicek unsur pasalnya — wilayahnya bukan lagi sekadar kesopanan</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="scrollhint">Pola bacanya: makin ke bawah, persoalannya bergeser dari rasa ke aturan tertulis. Di situlah pemeriksaan harus ikut bergeser.</p>
+    </section>
+
+    <section>
+      <h3>Cek tiga hal sebelum menyimpulkan</h3>
+      <p class="lead">Ini daftar cek yang dipakai di videonya — simpan dan pakai setiap kali ada yang bilang “itu melanggar hukum!”:</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Tindakannya apa, persisnya?</b><span>Jangan berhenti di kesan “kasar” atau “tidak sopan”. Uraikan perbuatan konkretnya: siapa melakukan apa, kepada siapa.</span></div></li>
+        <li><span class="n">2</span><div><b>Konteksnya di mana?</b><span>Obrolan sehari-hari, hubungan profesi, atau ruang publik? Konteks menentukan lensa mana yang relevan — termasuk apakah ada kode etik yang berlaku.</span></div></li>
+        <li><span class="n">3</span><div><b>Aturannya apa, dan unsurnya terpenuhi?</b><span>Sebutkan aturan tertulisnya. Kalau hukum: pasal apa, unsur-unsurnya apa, dan apakah perbuatan tadi memenuhi semuanya. Tanpa ini, simpulannya baru pendapat.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Cek cepat: masuk lensa yang mana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Klik satu situasi, lalu lihat lensa utama yang bekerja — dan kenapa bukan lensa lainnya.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook2(this,'potong')">Teman memotong pembicaraanmu terus-menerus</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook2(this,'advokat')">Advokat berperilaku tidak pantas terhadap kliennya</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook2(this,'kantor')">Karyawan melanggar tata tertib tertulis kantornya</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook2(this,'tuduh')">Seseorang menuduh orang lain mencuri, di depan umum, tanpa bukti</button>
+        </div>
+        <div class="result" id="result2">
+          <div class="verdict" id="verdict2"></div>
+          <p id="desc2"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 2</span>
+      <p>Sopan santun, etika, dan hukum bisa beririsan — tapi tidak dilarang hukum, belum tentu etis; dan tidak sopan, belum tentu melanggar hukum.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>UU No. 18 Tahun 2003 tentang Advokat — Pasal 26 ayat (1)–(7) tentang Kode Etik dan Dewan Kehormatan Advokat. Teks undang-undang dapat dibaca di <a href="https://peradi.or.id/index.php/profil/detail/undang-undang-no-18-tahun-2003" target="_blank" rel="noopener">situs PERADI</a>.</li>
+        <li>Kerangka tiga lensa (sopan santun — etika — hukum) sebagaimana disampaikan dalam konten kedua KataPasal.</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 3 ================= -->
+  <article class="reading" id="book3" role="tabpanel" aria-labelledby="btn-book3">
+    <div class="cover">
+      <span class="kick">E-Book Mini 03 · KataPasal</span>
+      <h2>Chat Kasar di Grup, Bisa Dipolisikan?</h2>
+      <p>Jawaban pendeknya: bisa — tapi tidak semua chat kasar adalah tindak pidana. Yang menentukan bukan seberapa kasar katanya, melainkan unsurnya: apakah ada tuduhan atas suatu perbuatan, apakah dimaksudkan supaya diketahui umum, dan apakah korbannya mengadu.</p>
+      <blockquote>
+        “Yang menentukan bukan kasarnya kata — tapi unsurnya: tuduhannya apa, niat penyebarannya apa, dan siapa yang mengadu.”
+        <footer>— Kalimat inti konten ketiga KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Perubahan besar per 2 Januari 2026 — jangan salah pasal</h3>
+      <p>Banyak konten lama masih menyebut <strong>Pasal 27A UU ITE</strong> untuk chat yang menyerang nama baik. Pasal itu memang pernah berlaku: ancaman maksimal 2 tahun penjara dan/atau denda Rp400 juta (Pasal 45 ayat (4)), dan versi fitnahnya 4 tahun dan/atau Rp750 juta (Pasal 45 ayat (6)). Tetapi Pasal II UU No. 1/2024 menyatakan Pasal 27A dan ketentuan pidananya <strong>hanya berlaku sampai KUHP baru diberlakukan</strong>.</p>
+      <p>KUHP baru (UU No. 1/2023) berlaku sejak <strong>2 Januari 2026</strong>. Jadi untuk chat yang dikirim pada atau setelah tanggal itu, yang bekerja adalah kelompok pasal penghinaan di KUHP baru — <strong>Pasal 433 (pencemaran), 434 (fitnah), 436 (penghinaan ringan), dan Pasal 441</strong> yang menambah sepertiga pidana bila dilakukan dengan sarana teknologi informasi. Untuk perbuatan sebelum 2 Januari 2026, aturan peralihan menentukan rezim mana yang dipakai — pada dasarnya yang lebih menguntungkan terdakwa.</p>
+    </section>
+
+    <section>
+      <h3>Tiga jenis kata di chat — nasib hukumnya beda</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Tuduhan atas suatu perbuatan</h4>
+          <p>Menyebut perbuatan konkret yang bisa dicek benar-salahnya: “dia menggelapkan uang kas”, “dia memalsukan tanda tangan”. Inilah wilayah <strong>pencemaran</strong> — dan bila tuduhannya tidak bisa dibuktikan serta bertentangan dengan yang diketahui penuduh, naik menjadi <strong>fitnah</strong>.</p>
+          <div class="sanction"><b>Jangkarnya</b>Pasal 433 dan 434 KUHP</div>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>Makian tanpa tuduhan</h4>
+          <p>Kata-kata kasar atau tidak senonoh yang tidak menuduhkan perbuatan apa pun. Menurut SKB Pedoman Implementasi UU ITE 2021, ini <strong>bukan pencemaran</strong>. Di KUHP baru, paling jauh ia bisa masuk <strong>penghinaan ringan</strong> — dan hanya dalam bentuk tertentu (lihat tabel di bawah).</p>
+          <div class="sanction"><b>Jangkarnya</b>Pasal 436 KUHP · SKB UU ITE 2021</div>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Kritik, pendapat, penilaian</h4>
+          <p>Penilaian, pendapat, hasil evaluasi, dan kritik — pengawasan, koreksi, dan saran atas hal yang menyangkut kepentingan umum — pada dasarnya <strong>bukan tindak pidana</strong>. Tapi label “kritik” bukan tameng otomatis: kritik yang menyelipkan tuduhan fakta palsu tentang seseorang tetap bisa dinilai sebagai pencemaran atau fitnah.</p>
+          <div class="sanction"><b>Jangkarnya</b>SKB UU ITE 2021 · Putusan MK 105/PUU-XXII/2024 · Pasal 433 ayat (3) KUHP</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Pasal-pasalnya, satu per satu</h3>
+      <p class="lead">Ancaman di KUHP baru memakai pola penjara <em>atau</em> denda (alternatif), dengan denda dalam sistem kategori Pasal 79: Kategori II = Rp10 juta, Kategori III = Rp50 juta, Kategori IV = Rp200 juta.</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:20%">Pasal</th><th style="width:38%">Perbuatannya</th><th>Ancaman maksimal</th></tr></thead>
+        <tbody>
+          <tr><td class="pasal">KUHP · 433 ayat (1)</td><td>Pencemaran lisan: menyerang kehormatan atau nama baik orang lain dengan menuduhkan suatu hal, dengan maksud supaya diketahui umum</td><td>9 bulan penjara <em>atau</em> denda Kategori II (Rp10 juta)</td></tr>
+          <tr><td class="pasal">KUHP · 433 ayat (2)</td><td>Pencemaran tertulis: sama, lewat tulisan/gambar yang disiarkan, dipertunjukkan, atau ditempel di tempat umum</td><td>1 tahun 6 bulan <em>atau</em> denda Kategori III (Rp50 juta)</td></tr>
+          <tr><td class="pasal">KUHP · 433 ayat (3)</td><td>Bukan pembelaan yang gagal — ini pengecualiannya: perbuatan untuk <b>kepentingan umum</b> atau karena <b>terpaksa membela diri</b> tidak dipidana</td><td>Tidak dipidana</td></tr>
+          <tr><td class="pasal">KUHP · 434</td><td>Fitnah: pelaku pencemaran diberi kesempatan membuktikan tuduhannya, tidak bisa membuktikan, dan tuduhan itu bertentangan dengan yang ia ketahui</td><td>3 tahun <em>atau</em> denda Kategori IV (Rp200 juta)</td></tr>
+          <tr><td class="pasal">KUHP · 436</td><td>Penghinaan ringan: penghinaan yang bukan pencemaran — di muka umum, di hadapan orangnya langsung, atau lewat tulisan yang dikirim/disampaikan kepada orangnya</td><td>6 bulan <em>atau</em> denda Kategori II (Rp10 juta)</td></tr>
+          <tr><td class="pasal">KUHP · 441 ayat (1)</td><td>Pemberatan: pasal-pasal 433–439 yang dilakukan <b>dengan sarana teknologi informasi</b> — di sinilah chat masuk</td><td>Pidana pokok ditambah <b>sepertiga</b></td></tr>
+          <tr><td class="pasal">UU ITE · 27A (lama)</td><td>Rezim sebelum 2026: menyerang kehormatan/nama baik dengan menuduhkan suatu hal lewat informasi/dokumen elektronik. Berhenti berlaku 2 Januari 2026 (Pasal II UU 1/2024)</td><td>Dulu: 2 tahun dan/atau Rp400 juta; fitnahnya 4 tahun dan/atau Rp750 juta</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="scrollhint">Catatan yang sering tertukar: fitnah di KUHP baru maksimal <b>3 tahun</b> (Pasal 434) — angka 4 tahun itu milik KUHP lama dan Pasal 45 ayat (6) UU ITE.</p>
+    </section>
+
+    <section>
+      <h3>Semuanya delik aduan — tanpa pengaduan korban, tidak dituntut</h3>
+      <div class="prose">
+        <p>Pasal 440 KUHP menegaskan Pasal 433, 434, dan 436 sampai 438 <strong>tidak dituntut jika tidak ada pengaduan dari korban</strong>. Dan yang bisa menjadi korban hanyalah <strong>orang perseorangan</strong>: Putusan MK No. 105/PUU-XXII/2024 dan Penjelasan Pasal 433 sama-sama menegaskan lembaga pemerintah, institusi, korporasi, profesi, atau jabatan tidak bisa menjadi korban pencemaran. Teman yang ikut tersinggung juga tidak bisa mengadu menggantikan korban.</p>
+        <p>Pengaduannya berbatas waktu: <strong>6 bulan</strong> sejak orang yang berhak mengadu mengetahui perbuatannya (9 bulan bila berdomisili di luar negeri) — Pasal 29 KUHP. Pengaduan masih bisa <strong>dicabut dalam 3 bulan</strong> setelah disampaikan, dan yang sudah dicabut tidak bisa diajukan lagi (Pasal 30). Di titik inilah perdamaian paling sering mengakhiri perkara semacam ini.</p>
+      </div>
+      <div class="callout">
+        <h4>“Harus ada yang tersinggung dulu” — keliru cara bacanya</h4>
+        <p>Yang disyaratkan undang-undang bukan perasaan tersinggung, melainkan <em>pengaduan formal dari korban</em>. SKB 2021 justru menegaskan fokus pemidanaan bukan pada perasaan korban, melainkan pada perbuatan pelaku yang dengan sengaja menyebarluaskan tuduhan. Tersinggung saja, tanpa unsur pasalnya, tidak cukup.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Grup tertutup: mengurangi risiko, bukan tameng otomatis</h3>
+      <p class="lead">Ini bagian yang paling sering disalahpahami — dan jawabannya memang belum tuntas. Dua arah bukti ini harus dibaca bersamaan:</p>
+      <div class="grid2">
+        <div class="card">
+          <h4>Kata pedoman resmi 2021</h4>
+          <p>SKB Pedoman Implementasi UU ITE (Menkominfo, Jaksa Agung, Kapolri, 23 Juni 2021) menyatakan penyebaran lewat <strong>grup percakapan tertutup atau terbatas</strong> — grup keluarga, pertemanan akrab, profesi, kantor, kampus — <strong>bukan</strong> delik pencemaran, karena unsur “diketahui umum” tidak terpenuhi; “publik” diartikan kumpulan besar orang yang kebanyakan tidak saling kenal, seperti unggahan media sosial publik dan grup terbuka. Praktik 2026 searah: sebuah penyelidikan di Polda Riau dihentikan karena grup WhatsApp-nya bersifat tertutup dan dikendalikan admin.</p>
+          <div class="sanction"><b>Statusnya</b>Pedoman bagi penyidik dan penuntut — tidak mengikat hakim, disusun untuk pasal lama, dan kekuatan berlakunya setelah 2026 belum pasti.</div>
+        </div>
+        <div class="card">
+          <h4>Kata putusan pengadilan 2026</h4>
+          <p>Putusan PN Palu No. 38/Pid.Sus/2026/PN Pal menghukum terdakwa yang menuduh korban memalsukan tanda tangan lewat pesan suara dan chat di grup WhatsApp berisi <strong>hanya 13 anggota yang saling kenal</strong>. Argumen “grup tertutup” ditolak: yang menentukan bukan jumlah anggota atau saling kenalnya, melainkan fakta bahwa terdakwa <strong>membuat grup itu sendiri, memilih dan memasukkan anggotanya, mengirim tuduhan untuk diterima orang selain korban, dan juga menyebarkannya ke orang di luar grup</strong>. Ia dihukum atas fitnah lewat sarana teknologi informasi (Pasal 433/434 jo. 441 ayat (1) KUHP) dengan pidana pengawasan 1 tahun.</p>
+          <div class="sanction"><b>Pelajaran</b>Label “closed group” di aplikasi tidak memutuskan perkara — yang ditimbang pengadilan adalah niat dan fakta penyebaranmu.</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:14px">
+        <h4>Pertanyaan terbuka: screenshot yang diteruskan orang lain</h4>
+        <p>Sampai halaman ini disusun, <b>tidak ditemukan aturan resmi</b> yang menyatakan bahwa screenshot yang diteruskan keluar grup oleh orang lain membuat pengirim pertama otomatis kena pidana, atau otomatis menjadi delik tersendiri bagi penerusnya. Di PN Palu, penyebaran keluar grup yang memberatkan dilakukan oleh terdakwa sendiri. Jadi bagian ini kami tandai apa adanya: <b>belum ada jawaban resminya</b> — jangan percaya siapa pun yang menyatakannya sebagai aturan pasti.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kalau kamu korbannya: jalur melapornya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Amankan bukti elektroniknya.</b><span>Screenshot dan dokumen elektronik adalah alat bukti yang sah (Pasal 5 UU ITE) — tapi keasliannya tetap bisa diuji. Simpan perangkat asli dan chat utuhnya tanpa disunting, lengkap dengan konteks, nama grup, daftar anggota, dan identitas pengirim.</span></div></li>
+        <li><span class="n">2</span><div><b>Mengadu sebagai korban, sebelum 6 bulan.</b><span>Datang ke SPKT Polres/Polda setempat untuk membuat laporan/pengaduan — karena ini delik aduan, pengaduan korban sendirilah pemicunya. Aduan siber juga bisa masuk lewat patrolisiber.id, kanal Direktorat Tindak Pidana Siber Bareskrim Polri; proses formalnya umumnya tetap berlanjut lewat laporan di SPKT.</span></div></li>
+        <li><span class="n">3</span><div><b>Harapkan mediasi lebih dulu.</b><span>SE Kapolri No. SE/2/II/2021 memerintahkan penyidik membedakan tegas kritik, masukan, hoaks, dan pencemaran nama baik, membuka ruang mediasi seluas-luasnya, dan menjadikan pidana upaya terakhir (<em>ultimum remedium</em>); Perpol No. 8/2021 mengatur penyelesaian lewat keadilan restoratif di kepolisian. Perdamaian plus pencabutan pengaduan adalah akhir yang paling umum untuk perkara seperti ini.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Cek cepat: chat ini bisa dipidana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Klik satu situasi, lalu lihat unsur mana yang bekerja — dan mana yang tidak terpenuhi.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook3(this,'tuduh')">Di grup, seseorang menulis “dia menggelapkan uang kas” tanpa bukti</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook3(this,'makian')">Makian kasar di grup, tanpa menuduh perbuatan apa pun</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook3(this,'kritik')">Kritik pedas atas kebijakan sebuah instansi di grup</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook3(this,'tertutup')">Tuduhan serius, tapi hanya di grup keluarga kecil yang tertutup</button>
+        </div>
+        <div class="result" id="result3">
+          <div class="verdict" id="verdict3"></div>
+          <p id="desc3"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 3</span>
+      <p>Tidak semua chat kasar bisa dipidana — yang bisa adalah tuduhan atas suatu perbuatan, yang dimaksudkan supaya diketahui umum, dan diadukan korbannya.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>UU No. 1/2023 tentang KUHP — Pasal 29, 30, 79, 433, 434, 436, 440, 441, dan 624. Teks undang-undang dapat dibaca di <a href="https://peraturan.info/uu/2023/1/isi" target="_blank" rel="noopener">peraturan.info</a>.</li>
+        <li>UU No. 1/2024 (perubahan UU ITE) — Pasal 5, Pasal 27A, Pasal 45 ayat (4)–(7), dan ketentuan peralihan Pasal II tentang berakhirnya Pasal 27A.</li>
+        <li>Putusan MK No. 105/PUU-XXII/2024 — pemaknaan unsur pencemaran nama baik: korban hanya orang perseorangan, dan kritik sebagai pengawasan, koreksi, dan saran atas kepentingan umum. Ringkasan resmi di <a href="https://www.mkri.id/berita/mk-mempertegas-pemaknaan-unsur-unsur-pencemaran-nama-baik-dalam-uu-ite--23133" target="_blank" rel="noopener">situs Mahkamah Konstitusi</a>.</li>
+        <li>SKB Pedoman Implementasi UU ITE 2021 (Keputusan Bersama Menkominfo No. 229/2021, Jaksa Agung No. 154/2021, Kapolri No. KB/2/VI/2021) — kriteria cacian/makian, penilaian/pendapat, dan grup tertutup; disusun untuk pasal lama dan statusnya setelah 2026 belum pasti.</li>
+        <li>Putusan PN Palu No. 38/Pid.Sus/2026/PN Pal — fitnah lewat grup WhatsApp tertutup beranggotakan 13 orang; tersedia di <a href="https://putusan3.mahkamahagung.go.id/direktori/download_file/d041f2101eea3f6f14ad070134cfbbe3/pdf/zaf1a684cbadf180a17d313131343330" target="_blank" rel="noopener">Direktori Putusan Mahkamah Agung</a>.</li>
+        <li>SE Kapolri No. SE/2/II/2021 dan Perpol No. 8/2021 — pembedaan kritik dan pencemaran, mediasi, dan keadilan restoratif dalam penanganan perkara.</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 4 ================= -->
+  <article class="reading" id="book4" role="tabpanel" aria-labelledby="btn-book4">
+    <div class="cover">
+      <span class="kick">E-Book Mini 04 · KataPasal</span>
+      <h2>Utang Tidak Dibayar, Bisa Dipenjara?</h2>
+      <p>Gagal bayar utang pada dasarnya adalah ingkar janji — bahasa hukumnya wanprestasi — dan itu urusan perdata, bukan pidana. Penjara bukan alat penagih utang. Yang bisa berubah menjadi pidana adalah bila sejak awal ada niat menipu: janji palsu, nama palsu, atau uang langsung dibawa kabur. Bedanya ada pada niat di awal, bukan pada besar kecilnya utang.</p>
+      <blockquote>
+        “Gagal bayar itu ingkar janji. Menipu sejak awal, itu cerita lain.”
+        <footer>— Kalimat inti konten keempat KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Bukan soal besar utangnya, soal niat di awal</h3>
+      <p>Utang adalah perikatan: satu pihak berjanji membayar, pihak lain berhak menagih. Ketika janji itu tidak dipenuhi, KUHPerdata menyebutnya <strong>wanprestasi</strong> (ingkar janji). Sanksinya perdata — ganti rugi atau pemenuhan perjanjian lewat gugatan — bukan penjara.</p>
+      <p>Tiga pasal yang menopang ini:</p>
+      <p><strong>Pasal 1238 KUHPerdata</strong> — debitur dinyatakan lalai lewat surat perintah (teguran) atau demi perikatan itu sendiri bila sudah lewat waktu yang ditentukan.</p>
+      <p><strong>Pasal 1243 KUHPerdata</strong> — ganti rugi (biaya, kerugian, bunga) baru diwajibkan bila debitur tetap lalai setelah dinyatakan lalai.</p>
+      <p><strong>Pasal 1267 KUHPerdata</strong> — pihak yang dirugikan dapat memilih menuntut pemenuhan perjanjian atau pembatalannya, disertai ganti rugi.</p>
+      <p>Tidak ada sanksi penjara dalam rangkaian pasal ini. Karena itu “lapor polisi saja biar dipenjara” bukan jalan pintas menagih utang — polisi menangani dugaan tindak pidana, dan gagal bayar semata bukan tindak pidana.</p>
+      <p>Pengecualiannya satu, dan tegas: bila <strong>sejak awal</strong> sudah ada maksud menipu — memakai nama palsu atau kedudukan palsu, tipu muslihat, atau rangkaian kata bohong untuk menggerakkan orang supaya memberi utang — perkaranya bisa menjadi dugaan penipuan, dan itu ranah pidana (Pasal 492 KUHP, lihat tabel pasal di bawah).</p>
+    </section>
+
+    <section>
+      <h3>Tiga situasi, tiga nasib hukumnya</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Berniat bayar, tapi belum bisa</h4>
+          <p>Temanmu meminjam dengan janji tanggal bayar, lalu usahanya gagal dan ia belum bisa membayar. Ia tidak menghilang, hanya belum mampu. Ini <strong>wanprestasi</strong>: sengketa perdata. Jalurnya teguran, kesepakatan baru (misalnya cicilan), atau gugatan.</p>
+          <div class="sanction"><b>Jangkarnya</b>KUHPerdata Pasal 1238, 1243, 1267</div>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>Berjanji lalu menghilang</h4>
+          <p>Ia berjanji membayar, lalu menghilang berbulan-bulan saat ditagih. Menyebalkan — tapi menghilang <strong>belum membuktikan</strong> ia menipu sejak awal. Selama tidak ada bukti niat menipu pada saat meminjam, perkara ini tetap perdata. Yang berubah adalah buktinya: simpan chat janji bayarnya, bukti transfer, dan riwayat penagihanmu; semua itu menjadi bahan teguran dan gugatan.</p>
+          <div class="sanction"><b>Jangkarnya</b>KUHPerdata Pasal 1238, 1243 — bukti niat awal adalah pembedanya</div>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Menipu sejak awal</h4>
+          <p>Ia meminjam dengan nama palsu, janji palsu, atau memang berencana membawa kabur uangnya sejak pertama kali meminta. Di sinilah cerita berubah: <strong>dugaan penipuan</strong>. Unsur kuncinya adalah maksud dan cara di awal — bukan besar utangnya, bukan pula lamanya ia menunggak belakangan.</p>
+          <div class="sanction"><b>Jangkarnya</b>Pasal 492 KUHP (pengganti Pasal 378 KUHP lama)</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Pasal-pasalnya, satu per satu</h3>
+      <p class="lead">Ancaman penipuan memakai pola penjara <em>atau</em> denda (alternatif), dengan denda dalam sistem kategori Pasal 79 KUHP: Kategori II = Rp10 juta, Kategori V = Rp500 juta.</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:20%">Pasal</th><th style="width:42%">Perbuatannya</th><th>Ancaman / akibat maksimal</th></tr></thead>
+        <tbody>
+          <tr><td class="pasal">KUHPerdata · 1238</td><td>Debitur dinyatakan lalai lewat surat perintah/teguran, atau demi perikatan sendiri bila lewat waktu yang ditentukan</td><td>Awal dari tuntutan ganti rugi — bukan pidana</td></tr>
+          <tr><td class="pasal">KUHPerdata · 1243</td><td>Ganti rugi (biaya, kerugian, bunga) bila debitur tetap lalai setelah dinyatakan lalai</td><td>Ganti rugi perdata</td></tr>
+          <tr><td class="pasal">KUHPerdata · 1267</td><td>Pihak yang dirugikan memilih: menuntut pemenuhan perjanjian, atau pembatalan disertai ganti rugi</td><td>Pemenuhan atau pembatalan + ganti rugi</td></tr>
+          <tr><td class="pasal">KUHP · 492</td><td>Penipuan: dengan maksud menguntungkan diri sendiri atau orang lain secara melawan hukum, memakai nama palsu atau kedudukan palsu, tipu muslihat, atau rangkaian kata bohong, menggerakkan orang supaya menyerahkan barang, memberi utang, membuat pengakuan utang, atau menghapus piutang</td><td>4 tahun penjara <em>atau</em> denda Kategori V (Rp500 juta)</td></tr>
+          <tr><td class="pasal">KUHP · 494</td><td>Penipuan ringan: antara lain bila nilai utang/piutang yang diserahkan tidak lebih dari Rp1.000.000,00</td><td>Pidana denda paling banyak Kategori II (Rp10 juta)</td></tr>
+          <tr><td class="pasal">Perma 2/2015 jo. Perma 4/2019</td><td>Gugatan sederhana untuk cidera janji dan/atau perbuatan melawan hukum dengan nilai gugatan materil paling banyak Rp500 juta</td><td>Diselesaikan paling lama 25 hari sejak sidang pertama</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="scrollhint">Catatan yang sering tertukar: penipuan dulu <b>Pasal 378 KUHP lama</b>, sekarang <b>Pasal 492 KUHP baru</b> (UU 1/2023, berlaku sejak 2 Januari 2026). Ancaman penjaranya tetap paling lama 4 tahun; yang baru adalah alternatif denda kategori V. Untuk perbuatan sebelum 2 Januari 2026, aturan peralihan (Pasal 3 ayat (1) dan Pasal 618 UU 1/2023) menentukan rezim mana yang dipakai — pada dasarnya yang lebih menguntungkan pelaku.</p>
+    </section>
+
+    <section>
+      <h3>Kalau kamu yang menagih: jalurnya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Amankan buktinya.</b><span>Simpan chat berisi janji meminjam dan janji bayar, bukti transfer, dan catatan penagihan. Bukti inilah yang membedakan “ia belum bisa bayar” dari “ia menipu sejak awal” — terutama bukti tentang apa yang ia katakan dan janjikan pada saat meminjam.</span></div></li>
+        <li><span class="n">2</span><div><b>Tegur tertulis dulu.</b><span>Kirim teguran tertulis (somasi) yang menyatakan ia lalai dan diminta membayar dalam tenggat yang jelas. Praktik somasi berulang memang lazim, tetapi somasi <b>bukan syarat mutlak</b> gugatan menurut Pasal 1238 — jangan menyatakannya sebagai syarat.</span></div></li>
+        <li><span class="n">3</span><div><b>Pilih jalurnya sesuai fakta.</b><span>Bila ia memang berniat bayar tapi belum bisa: tawarkan kesepakatan baru (misalnya cicilan tertulis). Bila ia tetap mangkir: gugatan sederhana untuk nilai sampai Rp500 juta, selesai paling lama 25 hari sejak sidang pertama. <b>Lapor polisi hanya bila ada bukti niat menipu sejak awal</b> — tanpa bukti itu, laporanmu akan kembali ke jalur perdata.</span></div></li>
+      </ol>
+      <div class="callout" style="margin-top:14px">
+        <h4>Lapor polisi bukan jalan pintas nagih utang</h4>
+        <p>Yang disyaratkan hukum untuk pidana bukan perasaan kesal karena ditagih tak dibalas, melainkan unsur penipuan: maksud menipu dan cara tipu daya pada saat meminjam. Tanpa unsur itu, jalur yang benar adalah teguran dan gugatan.</p>
+      </div>
+      <div class="prose" style="margin-top:18px">
+        <p><strong>Batas buku ini:</strong> tidak membahas pinjol ilegal, penagihan dengan ancaman atau kekerasan (itu persoalan pidana tersendiri), maupun utang dengan jaminan.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: utang ini bisa dipidana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Klik satu situasi, lalu lihat unsur mana yang bekerja — dan mana yang tidak terpenuhi.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook4(this,'bangkrut')">Teman pinjam untuk usaha, usahanya bangkrut, ia minta cicil — belum bisa bayar</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook4(this,'kabur')">Pinjam pakai nama orang lain, uang langsung dibawa kabur</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook4(this,'menghilang')">Sudah janji bayar, lalu menghilang 3 bulan saat ditagih</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook4(this,'kecil')">Ditipu sejak awal, tapi nominalnya cuma Rp800 ribu</button>
+        </div>
+        <div class="result" id="result4">
+          <div class="verdict" id="verdict4"></div>
+          <p id="desc4"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 4</span>
+      <p>Gagal bayar itu ingkar janji. Menipu sejak awal, itu cerita lain — dan bedanya dibuktikan dari niat di awal, bukan dari besar utangnya.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>UU No. 1/2023 tentang KUHP — Pasal 3 ayat (1), 79 ayat (1), 492, 494, 618, dan 624. Bunyi Pasal 492 dan nilai Kategori V (Rp500 juta) dibaca langsung dari teks lengkap UU 1/2023 (<a href="https://peraturan.info/uu/2023/1/isi" target="_blank" rel="noopener">peraturan.info</a>, Bab XXVII) pada 5 Nov 2026 ±19:45 WIB; koroborasi: DJKN Kemenkeu dan panglimahukum.id (salinan resmi peraturan.bpk.go.id). PDF resmi BPK sendiri belum dibuka langsung — bila nomor Pasal 492 suatu saat ingin tampil di layar video, pembacaan PDF BPK tetap langkah terakhir yang disarankan standar KataPasal.</li>
+        <li>KUHPerdata — Pasal 1238, 1243, 1267 (rumusan terkonfirmasi identik di beberapa sumber hukum: hukumku.id, sugalilawyer.com).</li>
+        <li>Perma No. 2/2015 jo. Perma No. 4/2019 — gugatan sederhana, batas nilai Rp500 juta dan penyelesaian paling lama 25 hari sejak sidang pertama (terkonfirmasi di situs pengadilan resmi, antara lain PA Lubuk Pakam).</li>
+        <li>Perbandingan Pasal 378 KUHP lama → Pasal 492 KUHP baru: lawyer-ahdanramdani.com; status UU 1/2026 tentang Penyesuaian Pidana: panglimahukum.id (14 Okt 2026) — Pasal 481–519 tidak termasuk yang diubah, jadi Pasal 492 tidak berubah (pemeriksaan sekunder).</li>
+        <li>Batas metode: “identitas palsu”/“janji palsu” dalam naskah video adalah parafrasa populer, bukan bunyi pasal — bunyi Pasal 492 adalah “nama palsu atau kedudukan palsu” dan “tipu muslihat atau rangkaian kata bohong”. Parafrasa itu tidak disajikan sebagai kutipan pasal.</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 5 ================= -->
+  <article class="reading" id="book5" role="tabpanel" aria-labelledby="btn-book5">
+    <div class="cover">
+      <span class="kick">E-Book Mini 05 · KataPasal</span>
+      <h2>Jualan Online Dipotong 0,5%, Ini Pajak Baru?</h2>
+      <p>Saldo masuk, eh, sudah kepotong duluan. Potongannya nyata — tapi pajaknya bukan pajak baru. Yang berubah adalah siapa yang memungut: sekarang marketplace, bukan penjual setor sendiri.</p>
+      <blockquote>
+        “Jadi yang berubah bukan pajaknya. Yang berubah, siapa yang memungut.”
+        <footer>— Kalimat inti konten kelima KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Bukan pajak baru. Yang baru: cara pungutnya.</h3>
+      <p>Sejak 1 Oktober 2026, empat marketplace yang ditunjuk DJP — Shopee, Tokopedia, Blibli, dan Lazada — memungut PPh Pasal 22 dari penjual saat transaksi terjadi. Pemerintah menegaskan PMK 37/2025 tidak menciptakan jenis pajak baru. Kewajiban PPh penjual sudah ada sebelumnya — sekarang dipungut di sumber oleh marketplace.</p>
+      <p>Tiga hal yang menopang ini:</p>
+    </section>
+
+    <section style="margin-top:18px">
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Yang membayar: pedagang</h4>
+          <p>Marketplace hanya pemungut. Pembeli tidak dikenai PPh tambahan — harga belanja tidak ditambah 0,5% untuk PPh ini.</p>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>0,5% dari omzet, bukan dari untung</h4>
+          <p>Tarifnya 0,5% × peredaran bruto yang tercantum di dokumen tagihan, tidak termasuk PPN &amp; PPnBM. Margin tipis atau tebal tidak mengubah hitungannya — basisnya omzet.</p>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Potongan itu tidak hilang</h4>
+          <p>Bagi penjual skema PPh final 0,5%, pungutan marketplace menjadi bagian pelunasan PPh finalnya. Bagi penjual ketentuan umum, pungutan itu menjadi kredit pajak di tahun berjalan — mengurangi pajak terutang di SPT.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Tiga situasi, tiga nasib potongannya</h3>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Omzet setahun belum lewat Rp500 juta, surat pernyataan sudah dikirim</h4>
+          <p>Kamu jualan sebagai orang pribadi, omzet setahunmu belum lewat Rp500 juta, dan kamu sudah menyampaikan surat pernyataan ke marketplace. Kamu tidak dipungut. Cukup surat pernyataan format lampiran PMK 37/2025 — tidak perlu Surat Keterangan Bebas (SKB).</p>
+          <div class="sanction"><b>Jangkarnya</b>PMK 37/2025; fasilitas Rp500 juta terkait PP 55/2022 jo. PP 20/2026</div>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>Omzet setahun belum lewat Rp500 juta, tapi surat pernyataan belum dikirim</h4>
+          <p>Omzetmu sebenarnya di bawah batas — tapi pengecualian itu hanya aktif sepanjang surat pernyataan disampaikan. Tanpa surat pernyataan, pemungutan tetap berjalan sampai pernyataanmu diterima marketplace. Jadi yang menentukan bukan cuma besar omzetmu, melainkan suratnya sudah sampai atau belum.</p>
+          <div class="sanction"><b>Jangkarnya</b>PMK 37/2025 — pengecualian bersyarat surat pernyataan</div>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Omzet melewati Rp500 juta (atau melewatinya di tengah tahun)</h4>
+          <p>Omzetmu di atas Rp500 juta setahun, atau gabungan kanalmu melewati batas itu di tengah tahun. Kamu dipungut 0,5% — dan bila batas terlampaui di tengah tahun, kamu wajib memperbarui surat pernyataan, lalu pemungutan mulai berjalan setelahnya. Tapi ingat: potongan itu bukan biaya yang hilang. Ia tercatat sebagai pembayaran pajakmu sendiri — pelunasan PPh final atau kredit pajak, tergantung skemamu.</p>
+          <div class="sanction"><b>Jangkarnya</b>PMK 37/2025; PP 55/2022 jo. PP 20/2026</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Hitungan — satu contoh yang dipakai di video</h3>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:44%">Komponen</th><th>Nilai</th></tr></thead>
+        <tbody>
+          <tr><td>Omzet di tagihan</td><td>Rp1.000.000</td></tr>
+          <tr><td>Tarif</td><td>× 0,5%</td></tr>
+          <tr><td>Dipungut marketplace</td><td>Rp5.000</td></tr>
+          <tr><td>Masuk ke penjual</td><td>Rp995.000 (sebelum potongan platform lain)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="prose" style="margin-top:16px">
+        <p>Dokumen tagihan / invoice dari marketplace dipersamakan sebagai bukti pemungutan — simpan untuk SPT-mu.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Aturannya, satu per satu</h3>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:22%">Aturan</th><th style="width:44%">Isinya</th><th>Fungsinya</th></tr></thead>
+        <tbody>
+          <tr><td class="pasal">PMK 37/2025</td><td>Menunjuk penyelenggara PMSE sebagai pemungut PPh Pasal 22; tarif 0,5% dari peredaran bruto; pengecualian surat pernyataan bagi orang pribadi s.d. Rp500 juta</td><td>Dasar seluruh pemungutan ini</td></tr>
+          <tr><td class="pasal">PP 55/2022 jo. PP 20/2026</td><td>Bagian omzet sampai Rp500 juta bagi wajib pajak orang pribadi tidak dikenai PPh; tarif final UMKM 0,5% dengan batas Rp4,8 miliar tetap dipertahankan bagi yang memenuhi ketentuan</td><td>Fasilitas di balik batas Rp500 juta</td></tr>
+          <tr><td class="pasal">PENG-46/PJ.09/2026</td><td>Pengumuman DJP yang sempat menunda implementasi sampai 1 November 2026</td><td>Sumber angka “November” yang beredar — sudah lewat, bukan tanggal berlaku</td></tr>
+          <tr><td class="pasal">Keputusan Dirjen Pajak, 24 Sep 2026</td><td>Penunjukan ulang empat marketplace — pemungutan dipercepat dan jalan lebih awal</td><td>Yang menggeser tanggal berlaku ke 1 Oktober 2026</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kronologi singkat — kenapa tanggalnya sempat membingungkan</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>11 Jun 2025</b><span>PMK 37/2025 ditetapkan; diundangkan dan mulai berlaku 14 Jul 2025.</span></div></li>
+        <li><span class="n">2</span><div><b>1 Jul 2026</b><span>DJP mengumumkan implementasi dan penunjukan empat marketplace.</span></div></li>
+        <li><span class="n">3</span><div><b>Sempat diumumkan</b><span>Penundaan sampai 1 November 2026 lewat PENG-46/PJ.09/2026. Inilah sumber angka “November” di banyak artikel.</span></div></li>
+        <li><span class="n">4</span><div><b>24 Sep 2026</b><span>Penunjukan ulang lewat Keputusan Dirjen Pajak; pemungutan dipercepat.</span></div></li>
+        <li><span class="n">5</span><div><b>1 Okt 2026 ✓</b><span>Pemungutan resmi berjalan. Inilah tanggal yang dipakai di video dan di buku ini.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Catatan yang sering tertukar</h3>
+      <div class="grid3">
+        <div class="card">
+          <h4>PPh 22 marketplace bukan PPh Final UMKM 0,5%</h4>
+          <p>Keduanya sama-sama 0,5%, tapi skemanya berbeda: PPh 22 adalah cara pungut oleh marketplace, sedangkan PPh Final UMKM (PP 55/2022) adalah skema tarif penjual. Jangan dicampur: potongan marketplace untuk penjual final menjadi pelunasan, untuk penjual ketentuan umum menjadi kredit pajak.</p>
+        </div>
+        <div class="card">
+          <h4>Batas Rp500 juta itu gabungan, bukan per toko</h4>
+          <p>Dihitung dari omzet gabungan semua kanal — semua marketplace ditambah toko fisik — bukan per toko. Satu orang, satu batas.</p>
+        </div>
+        <div class="card">
+          <h4>Tanggalnya 1 Oktober, bukan 1 November</h4>
+          <p>Angka November berasal dari pengumuman penundaan (PENG-46) yang kemudian tidak jadi dipakai setelah penunjukan ulang 24 September.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kalau kamu yang jualan: jalurnya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Hitung omzet gabunganmu.</b><span>Jumlahkan semua kanal — semua marketplace plus toko fisik — dalam satu tahun pajak. Satu orang, satu batas Rp500 juta.</span></div></li>
+        <li><span class="n">2</span><div><b>Kalau belum lewat Rp500 juta, sampaikan surat pernyataan ke marketplace-mu.</b><span>Formatnya lampiran PMK 37/2025; tidak perlu SKB. Tanpa surat ini, pengecualian tidak aktif.</span></div></li>
+        <li><span class="n">3</span><div><b>Simpan dokumen tagihan/invoice dari marketplace sebagai bukti pemungutan.</b><span>Untuk pelunasan PPh final atau kredit pajak di SPT.</span></div></li>
+        <li><span class="n">4</span><div><b>Kalau melewati batas di tengah tahun, perbarui surat pernyataanmu.</b><span>Pemungutan mulai berjalan setelahnya.</span></div></li>
+        <li><span class="n">5</span><div><b>Untuk kasus pajak spesifik tokomu, patokannya tetap aturan tertulis dan Kring Pajak 1500200.</b></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Batas buku ini</h3>
+      <div class="callout">
+        <h4>Edukasi umum, bukan nasihat pajak</h4>
+        <p>Buku ini tidak membahas cara unggah surat pernyataan per marketplace (menu di Seller Centre tiap platform berbeda-beda dan cepat berubah — cek ke marketplace-mu masing-masing), tidak membahas isu transfer / QRIS 9 November (sampai riset ini dibuat belum ada aturan resmi yang bisa dirujuk untuk itu), dan bukan nasihat pajak untuk kasus spesifik. Ini edukasi umum.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: potongan ini berlaku buatku?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Klik satu situasi, lalu lihat unsur mana yang bekerja — dan mana yang tidak terpenuhi.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook5(this,'bebas')">Jualan Rp800 ribu sebulan di Shopee, surat pernyataan sudah dikirim</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook5(this,'gabungan')">Jualan di Shopee + Tokopedia + toko fisik, gabungannya Rp520 juta setahun</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook5(this,'potongan')">Jualan Rp1 juta, dipotong Rp5 ribu</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook5(this,'lampaui')">Omzet melewati Rp500 juta di bulan Agustus</button>
+        </div>
+        <div class="result" id="result5">
+          <div class="verdict" id="verdict5"></div>
+          <p id="desc5"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 5</span>
+      <p>Jualan online sekarang dipotong 0,5 persen — bukan pajak baru. Yang berubah, siapa yang memungut: marketplace memungut PPh Pasal 22 sebesar 0,5% dari omzet, dan potongan itu adalah pajakmu sendiri.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>DJP — “Siapa Membayar Pajak Marketplace 0,5 Persen?” (pajak.go.id, artikel resmi DJP). Sumber tarif 0,5%, siapa yang membayar, contoh Rp1.000.000 → Rp5.000, dan batas Rp500 juta.</li>
+        <li>DJP — “PMK-37/2025, Wujud Simplifikasi dan Proteksi untuk UMKM” (pajak.go.id). Penjelasan bahwa ini bukan pajak baru, melainkan perubahan mekanisme pemungutan.</li>
+        <li>DJP — Siaran Pers: Implementasi PMK 37/2025, Penunjukan Empat Marketplace (pajak.go.id). Penunjukan Blibli, Shopee, Tokopedia, Lazada sebagai pemungut PPh.</li>
+        <li>PMK Nomor 37 Tahun 2025 &amp; PP 55/2022 jo. PP 20/2026 — dasar hukum penunjukan pemungut, tarif, pengecualian surat pernyataan, dan fasilitas omzet Rp500 juta untuk orang pribadi.</li>
+        <li>Seluruh fakta di atas diverifikasi ke artikel resmi DJP dan PMK 37/2025 pada 7 November 2026.</li>
+      </ul>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 6 ================= -->
+  <article class="reading" id="book6" role="tabpanel" aria-labelledby="btn-book6">
+    <div class="cover">
+      <span class="kick">E-Book Mini 06 · KataPasal</span>
+      <h2>Cuma Main Judol, Bisa Masuk Penjara Juga?</h2>
+      <p>Kedengarannya sepele: cuma ikut main, bukan yang buka lapak. Tapi jawabannya tegas: bisa. Dalam KUHP baru, yang dipidana bukan cuma bandarnya — pemain judi tanpa izin pun ada pasalnya sendiri.</p>
+      <blockquote>
+        “Mainnya sebentar, urusannya bisa bertahun-tahun.”
+        <footer>— Kalimat inti konten keenam KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Bukan cuma bandar. Pemain pun ada pasalnya.</h3>
+      <p>Banyak pemain merasa aman dengan logika sederhana: “yang melanggar hukum itu yang menyediakan judinya, saya cuma ikut main.” Logika itu tidak berlaku di KUHP baru. Pasal 427 UU 1/2023 mengatur orang yang menggunakan kesempatan main judi yang diadakan tanpa izin — rumusan itu persis menggambarkan pemainnya, bukan penyelenggaranya.</p>
+      <p>Ancaman untuk pemain: pidana penjara paling lama 3 tahun, atau pidana denda paling banyak Kategori III — nilainya Rp50 juta (nilai kategori denda diatur di Pasal 79 UU 1/2023). Perhatikan kata “atau”: hakim bisa menjatuhkan penjara, bisa juga denda — tapi dua-duanya pidana, dan dua-duanya tercatat.</p>
+      <p>Kenapa pemain tetap pidana meski “cuma ikut main”? Karena yang dilarang pasalnya bukan cuma membuka lapak judi, melainkan juga memakai kesempatan judi tanpa izin. Tanpa pemain, lapak tidak ada yang mengisi — hukum memutus rantai itu dari dua sisi sekaligus: penyelenggara dikejar lewat Pasal 426, pemain dikejar lewat Pasal 427.</p>
+    </section>
+
+    <section>
+      <h3>Pemain vs bandar: beda jauh, tapi dua-duanya pidana</h3>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:38%">Peran</th><th style="width:22%">Pasal</th><th>Ancaman maksimal</th></tr></thead>
+        <tbody>
+          <tr><td><b>Pemain</b> — memakai kesempatan judi tanpa izin</td><td class="pasal">Pasal 427 UU 1/2023</td><td>3 tahun penjara atau denda Kategori III (Rp50 juta)</td></tr>
+          <tr><td><b>Bandar / penyelenggara</b> — mengadakan atau memberi kesempatan judi tanpa izin</td><td class="pasal">Pasal 426 UU 1/2023</td><td>9 tahun penjara / denda Kategori VI (Rp2 miliar)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="lead" style="margin-top:20px">Tiga hal yang perlu dibaca dari tabel itu:</p>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Bedanya memang jauh</h4>
+          <p>Ancaman bandar tiga kali lipat ancaman pemain untuk penjara, dan dendanya Rp2 miliar berbanding Rp50 juta. Hukum membedakan peran — pemain bukan diperlakukan seperti bandar.</p>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>“Lebih ringan” bukan “tidak pidana”</h4>
+          <p>Tiga tahun tetap ancaman penjara sungguhan, dan denda Rp50 juta bukan angka kecil untuk kebanyakan pemain.</p>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Satu istilah yang dipakai episode ini: Pasal 427</h4>
+          <p>Kalau ada satu nomor yang diingat dari buku ini, itu nomor pasal pemainnya — karena justru pasal inilah yang paling sering dianggap tidak ada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h3>Skalanya: ini bukan soal satu-dua orang iseng</h3>
+      <p>Menurut PPATK, sepanjang Semester I 2026 saja ada 467,32 juta transaksi judi online dengan perputaran dana Rp86,82 triliun. Artinya “cuma ikut main” dilakukan ratusan juta kali dalam enam bulan — dan setiap kalinya adalah perbuatan yang masuk rumusan Pasal 427.</p>
+      <p>Angka sebesar itu juga menjelaskan kenapa penegakannya menyentuh pemain, bukan berhenti di bandar: bandar berganti situs dan berganti nama, pemainnya tetap orang-orang yang sama di ujung HP.</p>
+    </section>
+
+    <section class="prose">
+      <h3>Sudah kejadian: tiga pemain togel di Sumenep</h3>
+      <p>Ini bukan pasal yang tidur di buku. Pada 6 November 2026, Polresta Sumenep menjerat tiga pemain togel dengan Pasal 427 UU 1/2023 — ancaman paling lama 3 tahun / denda Rp50 juta. Pada kasus yang sama, dua pengepul dijerat Pasal 426 (maksimum 9 tahun / Rp2 miliar).</p>
+      <p>Perhatikan beda perlakuannya, karena di situlah tabel di atas jadi nyata: para pengepul ditahan, para pemain tidak ditahan. Kenapa pemainnya tidak ditahan? Karena ancaman pidana Pasal 427 berada di bawah 5 tahun — dan untuk ancaman di bawah 5 tahun, penahanan pada umumnya tidak dilakukan. Kasus kedua di Kalianget (3 November 2026) memakai pasal yang sama untuk pemain.</p>
+    </section>
+
+    <section>
+      <h3>Tidak ditahan bukan berarti bebas</h3>
+      <p class="lead">Ini bagian yang paling sering salah dibaca, jadi kita luruskan pelan-pelan:</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Tidak ditahan ≠ perkara berhenti.</b><span>Tiga pemain Sumenep itu statusnya terdakwa. Proses hukumnya jalan terus — berkas, sidang, dan putusan tetap berjalan, hanya saja mereka menjalaninya tanpa ditahan di rutan.</span></div></li>
+        <li><span class="n">2</span><div><b>Yang membayangi tetap ancaman pasalnya.</b><span>Di ujung proses, hakim tetap berhadapan dengan ancaman Pasal 427: sampai 3 tahun penjara atau denda sampai Rp50 juta. Tidak ditahan hari ini tidak menghapus kemungkinan dijatuhi pidana di putusan nanti.</span></div></li>
+        <li><span class="n">3</span><div><b>Status terdakwa itu sendiri beban nyata.</b><span>Dipanggil, diperiksa, menghadiri sidang, menunggu putusan — “urusannya bisa bertahun-tahun” bukan kiasan. Mainnya sebentar, prosesnya yang panjang.</span></div></li>
+      </ol>
+      <div class="prose" style="margin-top:18px">
+        <p>Jadi kalimat yang tepat bukan “pemain aman-aman saja”, melainkan: pemain ancamannya lebih ringan dari bandar dan umumnya tidak ditahan — tapi tetap terdakwa dalam perkara pidana.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Catatan yang sering tertukar</h3>
+      <div class="grid2">
+        <div class="card">
+          <h4>“Yang kena cuma bandar.”</h4>
+          <p>Tidak. Bandar kena Pasal 426, pemain kena Pasal 427. Dua pasal berbeda untuk dua peran berbeda di perbuatan yang sama.</p>
+        </div>
+        <div class="card">
+          <h4>“Tidak ditahan berarti bebas.”</h4>
+          <p>Tidak. Penahanan dan pemidanaan itu dua hal berbeda. Tidak ditahan soal ancaman pasalnya di bawah 5 tahun; bebas atau tidaknya ditentukan putusan hakim di akhir proses.</p>
+        </div>
+        <div class="card">
+          <h4>Angka “10 tahun / Rp10 miliar dari UU ITE” yang masih beredar</h4>
+          <p>Itu ketentuan lama. Ketentuan pidana perjudian di UU ITE sudah dicabut oleh KUHP baru (Pasal 622 ayat (1) huruf r UU 1/2023, dan pencabutan itu tetap tercantum setelah penyesuaian UU 1/2026) — dasar pidana judol sekarang ada di KUHP: Pasal 426 untuk penyelenggara, Pasal 427 untuk pemain. Kalau menemukan artikel yang masih mengancam pemain dengan angka UU ITE, kemungkinan besar artikel itu mengutip teks lama.</p>
+        </div>
+        <div class="card">
+          <h4>Angka 3 tahun ini sudah dicek ke teks aslinya</h4>
+          <p>Sempat beredar angka lain (4, 5, sampai 6 tahun) di berbagai situs. Yang dipakai buku ini adalah bunyi Pasal 427 di teks UU 1/2023 yang dibaca langsung, dikuatkan penerapan polisi di Sumenep — dan daftar perubahan UU 1/2026 sudah dibaca satu per satu: Pasal 426 dan 427 tidak ada di antara yang diubah.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kalau kamu masih main: jalurnya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Berhenti adalah satu-satunya jalur yang menutup risikonya.</b><span>Setiap sesi main adalah perbuatan yang masuk rumusan Pasal 427 — tidak ada jumlah kecil yang membuat pasal itu tidak berlaku.</span></div></li>
+        <li><span class="n">2</span><div><b>Kalau menemukan lapak atau diajak menyebar link, laporkan.</b><span>Selama November 2026 masih berjalan sayembara pelaporan masyarakat GEBUK JUDOL Ronde 3 (1 Oktober–30 November 2026) dari Komdigi — kanal untuk mengubah “tahu ada judol” menjadi laporan resmi.</span></div></li>
+        <li><span class="n">3</span><div><b>Kalau sudah terlanjur berurusan dengan proses hukum, jangan mengandalkan ringkasan seperti buku ini.</b><span>Dampingi prosesnya dengan penasihat hukum.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Batas buku ini</h3>
+      <div class="callout">
+        <h4>Edukasi umum, bukan nasihat hukum</h4>
+        <p>Buku ini membahas judol dari sisi pemain dan penyelenggara menurut Pasal 426–427 UU 1/2023. Buku ini tidak membahas peran lain di rantai judol (misalnya promosi oleh figur publik atau aliran dana), tidak membahas pemulihan kecanduan judi — itu ranah bantuan profesional dan layanan konseling, bukan buku hukum mini — dan bukan nasihat hukum untuk kasus spesifik. Ini edukasi umum, berlaku per November 2026.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: posisi siapa yang mana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Pilih situasinya, lalu lihat pasal mana yang bekerja.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook6(this,'main')">Ikut main slot online dari HP, merasa aman karena “cuma main”</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook6(this,'pengepul')">Jadi pengepul togel di kampung</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook6(this,'tidaktahan')">Pemain didakwa tapi tidak ditahan</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook6(this,'ite')">Baca artikel: “pemain judol diancam 10 tahun menurut UU ITE”</button>
+        </div>
+        <div class="result" id="result6">
+          <div class="verdict" id="verdict6"></div>
+          <p id="desc6"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 6</span>
+      <p>Cuma main judol, bukan bandar — tetap bisa masuk penjara: pemain judi tanpa izin kena Pasal 427, ancamannya sampai tiga tahun atau denda lima puluh juta rupiah. Mainnya sebentar, urusannya bisa bertahun-tahun.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>UU Nomor 1 Tahun 2023 (KUHP baru) — teks lengkap dibaca langsung 7 November 2026: Pasal 427 (pemain, 3 tahun / Kategori III), Pasal 426 ayat (1) (penyelenggara, 9 tahun / Kategori VI), Pasal 79 (nilai kategori denda: Kategori III = Rp50 juta, Kategori VI = Rp2 miliar).</li>
+        <li>UU Nomor 1 Tahun 2026 (Penyesuaian Pidana) — daftar 55 perubahan terhadap UU 1/2023 dibaca satu per satu dari salinan JDIH BKN, 8 November 2026: Pasal 426 dan 427 tidak termasuk yang diubah; butir Pasal 622 mengonfirmasi pencabutan ketentuan pidana perjudian UU ITE tetap berlaku.</li>
+        <li>Porosbaru.com, 6 November 2026 — Polresta Sumenep menjerat 3 pemain togel dengan Pasal 427 (tidak ditahan, ancaman di bawah 5 tahun) dan 2 pengepul dengan Pasal 426 (ditahan); kasus Kalianget 3 November 2026 memakai pasal yang sama.</li>
+        <li>PPATK (dikutip Isu Sepekan DPR, 5 Agustus 2026; BSI News, 14 Oktober 2026) — perputaran dana judol Semester I 2026: Rp86,82 triliun / 467,32 juta transaksi.</li>
+        <li>Riset topik viral KataPasal 6 November 2026 (kandidat #2) — sinyal GEBUK JUDOL Ronde 3 Komdigi (pelaporan masyarakat 1 Oktober–30 November 2026).</li>
+        <li>Berkas verifikasi internal: verifikasi-pasal-427-judol-20261107.md — termasuk penolakan angka 4/5/6 tahun dari sumber sekunder yang bertentangan dengan teks primer.</li>
+      </ul>
+      <p class="src" style="margin-top:14px">Edukasi umum, bukan nasihat hukum. Berlaku per November 2026.</p>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 7 ================= -->
+  <article class="reading" id="book7" role="tabpanel" aria-labelledby="btn-book7">
+    <div class="cover">
+      <span class="kick">E-Book Mini 07 · KataPasal</span>
+      <h2>Sudah Terlanjur Transfer ke Penipu, Uangnya Masih Bisa Balik?</h2>
+      <p>Rasanya nyesek banget: uang sudah melayang, penipunya hilang. Jawabannya: bisa — tapi tidak selalu, dan tidak selalu penuh. Uang hanya kembali kalau dananya masih ada di rekening penipu saat diblokir. Dan itu ditentukan satu hal: kecepatan lapor.</p>
+      <p style="margin-top:12px"><strong>IASC (Indonesia Anti-Scam Centre) · data s.d. 28 Oktober 2026 · ±5 menit baca</strong></p>
+      <blockquote>
+        “Laporan itu tidak menjamin uangmu kembali. Tapi tanpa laporan, peluangnya nol.”
+        <footer>— Kalimat inti konten ketujuh KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Bisa, tapi tidak selalu — dan tidak selalu penuh</h3>
+      <p>Begitu uang berpindah, penipu tidak menunggu. Dana dipindahkan lagi dalam hitungan menit — ke rekening lain, ke dompet digital lain, ke mana pun yang membuat jejaknya makin sulit dikejar. Karena itu pengembalian uang bukan soal “punya hak atau tidak”, melainkan soal <strong>apakah dananya masih ada di rekening penipu saat rekening itu diblokir</strong>.</p>
+      <p>Kalau lapor cepat dan dananya masih ada, ada yang bisa diselamatkan. Kalau lapor telat dan saldonya sudah kosong, tidak ada lagi yang bisa diblokir — sekalipun laporannya lengkap dan penipunya jelas.</p>
+      <p>Inilah kenapa buku ini tidak menjanjikan apa-apa. Yang bisa dijanjikan hanya ini: <strong>laporan yang cepat adalah satu-satunya peluang yang kamu punya.</strong></p>
+    </section>
+
+    <section>
+      <h3>Angkanya: yang diblokir vs yang kembali</h3>
+      <p class="lead">Sejak IASC beroperasi pada <strong>22 November 2024</strong> sampai <strong>28 Oktober 2026</strong>, ini yang tercatat (disampaikan Kepala Eksekutif PEPK OJK Dicky Kartikoyono di konferensi pers RDKB Oktober 2026, 5 November 2026):</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:44%"><span style="position:absolute;left:-9999px">Hal</span></th><th>Jumlah</th></tr></thead>
+        <tbody>
+          <tr><td><b>Laporan penipuan diterima</b></td><td><b>737.686</b> (347.130 lewat bank/PJP, 390.556 langsung ke sistem IASC)</td></tr>
+          <tr><td><b>Rekening dilaporkan dan terverifikasi</b></td><td><b>1.471.112</b></td></tr>
+          <tr><td><b>Rekening diblokir</b></td><td><b>743.589</b></td></tr>
+          <tr><td><b>Dana korban yang berhasil diblokir</b></td><td><b>Rp967,5 miliar</b></td></tr>
+          <tr><td><b>Dana yang berhasil dikembalikan ke korban</b></td><td><b>Rp208,9 miliar</b> (dari rekening di 24 bank)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="lead" style="margin-top:20px">Tiga hal yang perlu dibaca dari tabel itu:</p>
+      <div class="grid3">
+        <div class="card">
+          <span class="num">1</span><h4>Yang diblokir besar, yang kembali jauh lebih kecil</h4>
+          <p>Dari Rp967,5 miliar yang berhasil diblokir, baru Rp208,9 miliar yang sampai kembali ke korban. Selisihnya — sekitar Rp758,6 miliar — adalah dana yang sudah diblokir tapi belum (atau tidak) kembali. Jurang inilah inti video ini.</p>
+        </div>
+        <div class="card">
+          <span class="num">2</span><h4>Rasio agregatnya ±21,6%</h4>
+          <p>Itu hitungan 208,9 dibagi 967,5 — rasio keseluruhan dana yang kembali terhadap dana yang diblokir. Angka ini <strong>bukan peluang 21,6% untuk tiap korban</strong>. Peluang tiap kasus berbeda-beda, tergantung seberapa cepat lapor dan berapa dana yang tersisa di rekening penipu. Jangan baca angka ini sebagai “satu dari lima korban pasti dapat uangnya kembali”.</p>
+        </div>
+        <div class="card">
+          <span class="num">3</span><h4>Laporan naik cepat</h4>
+          <p>Sebulan sebelumnya, per 30 September 2026, laporannya masih 702.342 — artinya ada <strong>+35.344 laporan dalam satu bulan</strong>. Dana yang diblokir naik dari Rp811,1 miliar menjadi Rp967,5 miliar dalam periode yang sama, tapi dana yang kembali hanya naik dari Rp207,16 miliar menjadi Rp208,9 miliar. Laporan dan pemblokiran melesat; pengembalian merangkak. Itu sebabnya kecepatan lapor jadi penentu: sistemnya bekerja, tapi waktunya sempit.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="prose">
+      <h3>Kenapa kecepatan lapor menentukan segalanya</h3>
+      <p>Bayangkan dua korban dengan kasus yang sama persis — nominal sama, modus sama, rekening penipu sama. Yang satu lapor dalam hitungan menit setelah sadar, yang satu baru lapor besok pagi. Peluang mereka tidak sama, karena yang dikejar bukan penipunya, melainkan <strong>saldo yang tersisa</strong>.</p>
+      <p>Begitu laporan masuk dan rekening diblokir, yang diselamatkan hanyalah dana yang masih ada di situ. Penipu yang sempat memindahkan dana lebih dulu sudah membawa pergi bagian yang tidak bisa dikejar lewat pemblokiran. Karena itu urutan yang benar bukan “pikir-pikir dulu, lapor nanti”, melainkan <strong>lapor dulu, urus sisanya sesudahnya</strong>.</p>
+    </section>
+
+    <section class="prose">
+      <h3>Penipuan itu pidana</h3>
+      <p>Di luar soal uang kembali atau tidak, ada sisi lain yang sering dilupakan: perbuatan penipunya sendiri adalah tindak pidana. Penipuan diatur <strong>Pasal 492 UU 1/2023</strong> (KUHP baru, pengganti Pasal 378 KUHP lama), dengan ancaman <strong>pidana penjara paling lama 4 tahun, atau pidana denda paling banyak Kategori V — nilainya Rp500 juta</strong>.</p>
+      <p>Kenapa ini penting untuk korban? Karena laporanmu bukan cuma soal memblokir rekening. Laporan polisi adalah jalur hukum yang membuat perbuatan penipu itu diproses sebagai perkara pidana — terpisah dari jalur pemblokiran dana di IASC. Dua jalur ini saling melengkapi, dan keduanya perlu ditempuh.</p>
+      <p><strong>Satu istilah yang dipakai episode ini: IASC.</strong> Kalau ada satu nama yang diingat dari buku ini, itu nama pusat pelaporan penipuan ini — karena justru di sinilah laporan soal dana itu masuk.</p>
+    </section>
+
+    <section>
+      <h3>Dua jalur yang wajib ditempuh</h3>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:30%">Jalur</th><th style="width:38%">Tujuannya</th><th>Lewat mana</th></tr></thead>
+        <tbody>
+          <tr><td><b>Lapor ke IASC — jalur finansial</b></td><td>Pemblokiran / penundaan transaksi di rekening penipu</td><td>Portal resmi <b>iasc.ojk.go.id</b></td></tr>
+          <tr><td><b>Lapor ke polisi — jalur hukum</b></td><td>Laporan Polisi (LP) agar perbuatan penipu diproses sebagai perkara pidana</td><td>Kantor polisi terdekat</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="prose" style="margin-top:18px">
+        <p>Perhatikan: <strong>IASC bukan pengganti laporan polisi.</strong> IASC mengurus dananya; polisi mengurus pidananya. Kalau hanya lapor ke IASC, tidak ada perkara pidana yang berjalan. Kalau hanya lapor ke polisi, tidak ada pemblokiran rekening yang secepat jalur IASC. Keduanya harus ditempuh.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Catatan yang sering tertukar</h3>
+      <div class="grid2">
+        <div class="card">
+          <h4>“Sudah lapor ke IASC, uang pasti kembali.”</h4>
+          <p>Tidak. Portal resmi IASC sendiri yang menegaskan: <strong>“Pelaporan ke IASC tidak menjamin dana Anda akan kembali.”</strong> Laporan itu syaratnya, bukan jaminannya.</p>
+        </div>
+        <div class="card">
+          <h4>“Rasio 21,6% berarti peluang saya 21,6%.”</h4>
+          <p>Tidak. Itu rasio agregat seluruh dana — total yang kembali dibagi total yang diblokir. Peluang tiap kasus ditentukan kecepatan lapor dan sisa saldo, bukan angka agregat ini.</p>
+        </div>
+        <div class="card">
+          <h4>“Lapor ke IASC saja sudah cukup, tidak perlu ke polisi.”</h4>
+          <p>Tidak. IASC bukan pengganti laporan polisi. Jalur finansial dan jalur hukum itu dua hal berbeda, dan keduanya perlu ditempuh.</p>
+        </div>
+        <div class="card">
+          <h4>“Ada yang menghubungi saya menawarkan jasa pemulihan dana.”</h4>
+          <p>Waspada — itu modus lanjutan. Kalau ada dana yang berhasil diselamatkan, korban <strong>hanya dihubungi resmi oleh banknya sendiri</strong> — bukan oleh IASC, bukan oleh “jasa pemulihan” apa pun. Siapa pun yang mengaku bisa mengembalikan danamu dengan imbalan, itu penipu kedua.</p>
+        </div>
+        <div class="card">
+          <h4>“Angka Rp825,2 miliar yang beredar soal dana diblokir.”</h4>
+          <p>Angka itu sempat muncul di sebuah siaran pers untuk cutoff 30 September 2026, tapi bertentangan dengan angka Rp811,1 miliar dari RDK September 2026 untuk cutoff yang sama. Karena konflik itu, angka Rp825,2 miliar <strong>tidak dipakai</strong> di buku ini maupun di video. Yang dipakai adalah data 28 Oktober 2026 yang konsisten antar-pemberitaan RDKB Oktober.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kalau kamu baru sadar ketipu: jalurnya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Hubungi bank / dompet digitalmu dulu, lewat kanal resmi.</b><span>Nomor yang tertera di aplikasi atau di kartu — bukan nomor yang dikasih pelaku, bukan nomor dari pesan yang mencurigakan. Minta bantuan pemblokiran atau penundaan transaksi secepat mungkin.</span></div></li>
+        <li><span class="n">2</span><div><b>Lapor ke IASC.</b><span>Buka portal resmi <b>iasc.ojk.go.id</b> → periksa kelengkapan → buat dan kirim laporan → <b>simpan nomor tiketnya</b> → lacak statusnya. Siapkan: identitas dan kontak aktif, rekening korban dan rekening tujuan, kronologi beserta tanggal dan waktu, nominal, serta bukti transfer dan percakapan. Ingat: <b>satu formulir = satu rekening tujuan.</b></span></div></li>
+        <li><span class="n">3</span><div><b>Buat Laporan Polisi (LP)</b><span>di kantor polisi terdekat. IASC bukan pengganti laporan ini.</span></div></li>
+        <li><span class="n">4</span><div><b>Amankan akunmu.</b><span>Ganti password dari perangkat yang bersih, dan aktifkan MFA (autentikasi dua faktor) — supaya pelaku tidak bisa masuk lagi lewat celah yang sama.</span></div></li>
+      </ol>
+      <div class="prose" style="margin-top:18px">
+        <p>Semua langkah ini dikerjakan secepat mungkin, dalam urutan itu: <strong>bank dulu → IASC → laporan polisi → amankan akun.</strong> Menunda satu langkah saja bisa berarti saldo penipu sudah keburu kosong.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Batas buku ini</h3>
+      <div class="callout">
+        <h4>Edukasi umum, bukan nasihat hukum</h4>
+        <p>Buku ini membahas pengembalian dana korban penipuan lewat IASC dan laporan polisi menurut data IASC s.d. 28 Oktober 2026 dan Pasal 492 UU 1/2023. Buku ini tidak membahas modus penipuan satu per satu, tidak membahas pemulihan dana lewat jalur perdata atau jalur lain di luar IASC dan laporan polisi, dan bukan nasihat hukum untuk kasus spesifik. Ini edukasi umum, berlaku per November 2026.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: situasimu yang mana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Pilih situasinya, lalu lihat langkah mana yang bekerja.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook7(this,'baru')">Baru sadar ketipu, uang baru saja ditransfer</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook7(this,'diblokir')">Sudah lapor ke IASC, dananya diblokir tapi belum kembali</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook7(this,'pemulihan')">Ada yang menghubungi, mengaku dari IASC atau menawarkan jasa pemulihan dana</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook7(this,'ragu')">Ragu apakah kasusmu “cukup besar” untuk dilaporkan</button>
+        </div>
+        <div class="result" id="result7">
+          <div class="verdict" id="verdict7"></div>
+          <p id="desc7"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 7</span>
+      <p>Sudah terlanjur transfer ke penipu, uangnya masih bisa balik? Bisa, tapi tidak selalu. Uang cuma kembali kalau dananya masih ada di rekening penipu saat diblokir. Jadi yang menentukan itu kecepatan lapor. Laporan itu tidak menjamin uangmu kembali. Tapi tanpa laporan, peluangnya nol.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>InvestorTrust, 7 Nov 2026 — “IASC OJK Blokir Rp967,5 Miliar Dana Korban Penipuan” (RDKB Oktober 2026, 5 Nov 2026): <a href="https://investortrust.id/financial/121849/iasc-ojk-blokir-rp-967-5-miliar-dana-korban-penipuan" target="_blank" rel="noopener">investortrust.id</a>.</li>
+        <li>Kontan via TradingView, 6 Nov 2026 — “IASC Terima 737.686 Laporan Kasus Penipuan hingga Oktober 2026”: <a href="https://id.tradingview.com/news/kontan:2c6c1380c87ea:0/" target="_blank" rel="noopener">id.tradingview.com</a>.</li>
+        <li>Portal resmi IASC OJK — langkah pelaporan, dua jalur wajib, pernyataan tidak ada jaminan pengembalian: <a href="https://iasc.ojk.go.id/" target="_blank" rel="noopener">iasc.ojk.go.id</a>.</li>
+        <li>OJK RDK September 2026 (5 Okt 2026) via satpamsiber.id — snapshot 30 Sep 2026 (702.342 laporan; 702.833 rekening diblokir; Rp811,1 M diblokir; Rp207,16 M kembali): <a href="https://www.satpamsiber.id/artikel-lapor-scam-iasc-segera-2026" target="_blank" rel="noopener">satpamsiber.id</a>.</li>
+        <li>Verifikasi Pasal 492 UU 1/2023 — episode utang, 5–6 Nov 2026 (berkas verifikasi episode-04-utang).</li>
+      </ul>
+      <p class="src" style="margin-top:14px">Edukasi umum, bukan nasihat hukum. Berlaku per November 2026.</p>
+    </section>
+  </article>
+
+  <!-- ================= BOOK 8 ================= -->
+  <article class="reading active" id="book8" role="tabpanel" aria-labelledby="btn-book8">
+    <div class="cover">
+      <span class="kick">E-Book Mini 08 · KataPasal</span>
+      <h2>Di Struk Tertulis “Barang Tidak Dapat Dikembalikan” — Tulisan Itu Sah?</h2>
+      <p>Belanja 11.11, barangnya cacat, toko malah nunjuk tulisan di struk: “barang tidak dapat dikembalikan”. Rasanya nyebelin — tapi jawabannya jelas: <strong>tulisan itu tidak berlaku.</strong> Klausul seperti itu dilarang undang-undang, dan dinyatakan batal demi hukum.</p>
+      <p style="margin-top:12px"><strong>Klausula baku · UU 8/1999 tentang Perlindungan Konsumen · ±5 menit baca</strong></p>
+      <blockquote>
+        “Tulisan itu tidak berlaku. Tapi ingat: refund bukan karena berubah pikiran.”
+        <footer>— Kalimat inti konten kedelapan KataPasal</footer>
+      </blockquote>
+    </div>
+
+    <section class="prose">
+      <h3>Tulisan di struk itu bukan hukum</h3>
+      <p>Struk belanja sering memuat kalimat yang bunyinya seperti aturan: “barang yang sudah dibeli tidak dapat dikembalikan/ditukar”, “tidak ada refund”, “segala pembelian bersifat final”. Kalimat itu dicetak sepihak oleh toko — tanpa kamu tawar, tanpa kamu setujui satu per satu. Dalam bahasa hukum, itu namanya <strong>klausula baku</strong>: aturan sepihak yang sudah ditetapkan pelaku usaha dan tinggal diterima konsumen apa adanya (Pasal 1 angka 10 UU 8/1999).</p>
+      <p>Dan justru karena sepihak itulah, undang-undang membatasinya. <strong>Pasal 18 ayat (1) UU 8/1999</strong> melarang pelaku usaha mencantumkan klausula baku yang menyatakan:</p>
+      <div class="tablewrap">
+      <table>
+        <thead><tr><th style="width:16%">Huruf</th><th>Bunyi larangan</th></tr></thead>
+        <tbody>
+          <tr><td class="pasal">b</td><td>Pelaku usaha berhak <strong>menolak penyerahan kembali barang</strong> yang dibeli konsumen</td></tr>
+          <tr><td class="pasal">c</td><td>Pelaku usaha berhak <strong>menolak penyerahan kembali uang</strong> yang dibayarkan atas barang dan/atau jasa yang dibeli konsumen</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="margin-top:16px">Jadi klausul “tidak dapat dikembalikan” itu bukan cuma tidak sopan — <strong>dilarang oleh Pasal 18 ayat (1) huruf b dan c</strong>. Dan akibatnya ditegaskan di ayat berikutnya: <strong>Pasal 18 ayat (3)</strong> menyatakan setiap klausula baku yang melanggar ketentuan itu <strong>“dinyatakan batal demi hukum”</strong> — artinya klausul itu dianggap tidak pernah ada. Toko tidak bisa bersembunyi di balik tulisannya sendiri.</p>
+    </section>
+
+    <section class="prose">
+      <h3>Tapi refund tidak tanpa syarat</h3>
+      <p>Ini bagian yang sering terlewat — dan penting supaya tidak overclaim. Batalnya klausul itu <strong>bukan</strong> berarti kamu bisa mengembalikan barang apa pun, kapan pun, dengan alasan apa pun.</p>
+      <p>Hak ganti rugi diatur <strong>Pasal 19 UU 8/1999</strong>, dan ia terikat pada kondisi: pelaku usaha bertanggung jawab memberi ganti rugi atas <strong>“kerusakan, pencemaran, dan/atau kerugian konsumen akibat mengkonsumsi barang dan/atau jasa”</strong> (ayat 1). Sederhananya: refund itu hakmu <strong>kalau barangnya cacat, rusak, atau tidak sesuai dengan yang dijanjikan/dipesan</strong>. “Berubah pikiran” saja — barangnya baik-baik saja, cuma kamu tidak jadi suka — <strong>bukan</strong> dasar Pasal 19.</p>
+      <p>Bentuk ganti ruginya (Pasal 19 ayat 2): <strong>pengembalian uang, atau penggantian barang dan/atau jasa yang sejenis atau setara nilainya</strong>, atau perawatan kesehatan dan/atau santunan bila ada kerugian kesehatan. Dan waktunya jelas: <strong>“dalam tenggang waktu 7 (tujuh) hari setelah tanggal transaksi”</strong> (Pasal 19 ayat 3).</p>
+      <p>Satu pengecualian yang adil: ganti rugi itu <strong>tidak berlaku apabila pelaku usaha dapat membuktikan bahwa kesalahan tersebut merupakan kesalahan konsumen</strong> (Pasal 19 ayat 5). Barang rusak karena kamu yang menjatuhkannya, misalnya — itu bukan tanggung jawab toko.</p>
+      <p>Hak ini juga diakui sebagai hak konsumen secara umum: <strong>Pasal 4 huruf h</strong> memberi hak “untuk mendapatkan kompensasi, ganti rugi dan/atau penggantian, apabila barang dan/atau jasa yang diterima tidak sesuai dengan perjanjian atau tidak sebagaimana mestinya.”</p>
+    </section>
+
+    <section class="prose">
+      <h3>Kalau toko tetap menolak: jalurnya</h3>
+      <p>Klausulnya batal, barangnya cacat, tapi toko tetap menolak mentah-mentah? Undang-undang menyiapkan jalurnya. <strong>Pasal 23 UU 8/1999</strong>: pelaku usaha yang menolak, tidak menanggapi, atau tidak memenuhi ganti rugi <strong>“dapat digugat melalui badan penyelesaian sengketa konsumen atau mengajukan ke badan peradilan di tempat kedudukan konsumen.”</strong> Artinya kamu bisa mengadu ke <strong>BPSK (Badan Penyelesaian Sengketa Konsumen)</strong> atau menggugat ke pengadilan di kotamu — tidak perlu datang ke kota tempat toko berada.</p>
+      <p>Dan pelanggaran Pasal 18 sendiri bukan pelanggaran ringan: <strong>Pasal 62 ayat (1)</strong> mengancam pelaku usaha yang melanggar Pasal 18 (bersama beberapa pasal lain) dengan <strong>pidana penjara paling lama 5 (lima) tahun atau pidana denda paling banyak Rp2.000.000.000,00 (dua miliar rupiah)</strong>. Ancaman ini bukan untuk menakut-nakuti pembeli — tapi untuk menunjukkan seberapa serius undang-undang memandang klausul sepihak yang merugikan konsumen.</p>
+    </section>
+
+    <section>
+      <h3>Catatan yang sering tertukar</h3>
+      <div class="grid2">
+        <div class="card">
+          <h4>“Tulisannya ada di struk, jadi itu aturannya.”</h4>
+          <p>Tidak. Struk bukan undang-undang. Klausul yang dilarang Pasal 18 ayat (1) dinyatakan batal demi hukum (ayat 3) — toko tidak bisa membuat aturan sendiri yang bertentangan dengan undang-undang.</p>
+        </div>
+        <div class="card">
+          <h4>“Klausulnya batal, jadi saya bisa refund kapan pun dengan alasan apa pun.”</h4>
+          <p>Tidak. Batalnya klausul hanya menghilangkan tameng toko. Hak refundnya sendiri tetap butuh alasan: barang cacat, rusak, atau tidak sesuai pesanan (Pasal 19 ayat 1). “Berubah pikiran” bukan dasar.</p>
+        </div>
+        <div class="card">
+          <h4>“Marketplace memberi 7 hari retur, itu bunyi undang-undangnya.”</h4>
+          <p>Tidak. Kebijakan retur 7 hari di marketplace adalah <strong>kebijakan toko/platform, bukan isi UU 8/1999</strong>. Yang dari UU hanya dua hal: klausul larangan itu batal (Pasal 18 ayat 3), dan ganti rugi dilaksanakan dalam 7 hari setelah transaksi (Pasal 19 ayat 3). Jangan samakan keduanya.</p>
+        </div>
+        <div class="card">
+          <h4>“Ada aturan khusus belanja 11.11.”</h4>
+          <p>Tidak. 11.11 hanya momentum — orang belanja jauh lebih banyak, jadi struk berisi klausul seperti ini makin sering ditemui. Aturannya tetap UU 8/1999 yang sama, berlaku sepanjang tahun.</p>
+        </div>
+        <div class="card">
+          <h4>“Saya harus gugat ke kota tempat toko berada.”</h4>
+          <p>Tidak. Pasal 23 membolehkan gugatan di <strong>tempat kedudukan konsumen</strong> — pengadilan di kotamu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3>Kalau barangmu cacat: jalurnya</h3>
+      <ol class="steps">
+        <li><span class="n">1</span><div><b>Simpan buktinya dulu.</b><span>Struk/nota, foto barang cacatnya, dan video unboxing kalau ada. Bukti ini yang membuat klaimmu kuat — dan yang membuat toko sulit mengelak.</span></div></li>
+        <li><span class="n">2</span><div><b>Minta ganti rugi ke toko, sebutkan dasarnya.</b><span>Uang kembali atau barang pengganti, dalam 7 hari setelah transaksi (Pasal 19 ayat 2–3). Kalau toko menunjuk tulisan “tidak dapat dikembalikan”, jawabannya: klausul itu dilarang Pasal 18 dan batal demi hukum.</span></div></li>
+        <li><span class="n">3</span><div><b>Kalau ditolak, adukan ke BPSK</b><span>di daerahmu, atau gugat ke pengadilan di kotamu (Pasal 23).</span></div></li>
+        <li><span class="n">4</span><div><b>Catat semuanya.</b><span>Tanggal beli, tanggal komplain, nama yang kamu ajak bicara, dan jawaban toko. Kalau sampai ke BPSK/pengadilan, catatan ini yang bicara.</span></div></li>
+      </ol>
+    </section>
+
+    <section>
+      <h3>Batas buku ini</h3>
+      <div class="callout">
+        <h4>Edukasi umum, bukan nasihat hukum</h4>
+        <p>Buku ini membahas klausul “tidak dapat dikembalikan/direfund” menurut UU 8/1999 tentang Perlindungan Konsumen (Pasal 1 angka 10, Pasal 4 huruf h, Pasal 18, Pasal 19, Pasal 23, Pasal 62 ayat 1). Buku ini tidak membahas kebijakan retur masing-masing marketplace (itu kebijakan platform, bukan hukum), tidak membahas sengketa di luar perlindungan konsumen, dan bukan nasihat hukum untuk kasus spesifik. Ini edukasi umum, berlaku per November 2026.</p>
+      </div>
+    </section>
+
+    <section>
+      <h3>Cek cepat: situasimu yang mana?</h3>
+      <div class="checker">
+        <h4>Pilih situasinya</h4>
+        <p>Pilih situasinya, lalu lihat langkah mana yang bekerja.</p>
+        <div class="scenarios">
+          <button class="scen" aria-pressed="false" onclick="checkBook8(this,'cacat')">Barang cacat / tidak sesuai pesanan, toko nunjuk tulisan “tidak dapat dikembalikan”</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook8(this,'pikiran')">Barang baik-baik saja, kamu cuma berubah pikiran</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook8(this,'menolak')">Toko tetap menolak padahal barangnya cacat</button>
+          <button class="scen" aria-pressed="false" onclick="checkBook8(this,'kesalahan')">Barang rusak karena kesalahanmu sendiri</button>
+        </div>
+        <div class="result" id="result8">
+          <div class="verdict" id="verdict8"></div>
+          <p id="desc8"></p>
+        </div>
+      </div>
+    </section>
+
+    <div class="keyline">
+      <span class="kick">Kalimat Inti · Konten 8</span>
+      <p>Di struk belanja tertulis barang tidak dapat dikembalikan — tulisan itu sah nggak sih? Jawabannya: tulisan itu tidak berlaku. Klausula baku seperti itu dilarang Pasal 18: toko tidak boleh menolak barang dikembalikan, tidak boleh menolak uang dikembalikan. Klausul yang melanggar dinyatakan batal demi hukum. Tapi ingat: refund bukan karena berubah pikiran. Kalau barang cacat atau tidak sesuai pesanan, toko wajib ganti rugi: uang kembali atau barang pengganti, dalam tujuh hari setelah transaksi.</p>
+    </div>
+
+    <section>
+      <h3>Sumber</h3>
+      <ul class="src">
+        <li>Teks lengkap UU 8/1999 tentang Perlindungan Konsumen (LN 1999 No. 42, TLN No. 3821), PDF: <a href="https://psp.pertanian.go.id/storage/535/Undangundang-No.-8-Th.-1999-ttg-Perlindungan-Konsumen.pdf" target="_blank" rel="noopener">psp.pertanian.go.id</a>.</li>
+        <li>Metadata resmi JDIH Setjen DPR RI — UU 8/1999, ditetapkan &amp; diundangkan 20 April 1999: <a href="https://jdih.dpr.go.id/setjen/detail-dokumen/tipe/uu/id/409" target="_blank" rel="noopener">jdih.dpr.go.id</a>.</li>
+        <li>Salinan teks resmi UU 8/1999 (ANU Open Research Repository): <a href="https://openresearch-repository.anu.edu.au/server/api/core/bitstreams/87ca6b4f-6730-40f2-849d-8c12624e5a21/content" target="_blank" rel="noopener">openresearch-repository.anu.edu.au</a>.</li>
+        <li>Kompilasi DPR RI (konfirmasi silang Pasal 18): <a href="https://berkas.dpr.go.id/puspanlakuu/kompilasi/kompilasi-public-563.pdf" target="_blank" rel="noopener">berkas.dpr.go.id</a>.</li>
+        <li>Cek silang primer 10 Nov 2026: Pasal 18 ayat (1) huruf b/c, ayat (3); Pasal 19 ayat (1)(2)(3)(5); Pasal 4 huruf h; Pasal 23; Pasal 62 ayat (1); Pasal 1 angka 10 — semua cocok.</li>
+      </ul>
+      <p class="src" style="margin-top:14px">Edukasi umum, bukan nasihat hukum. Berlaku per November 2026.</p>
+    </section>
+  </article>
+
+  <div class="disclaimer">
+    <b>Catatan penggunaan.</b> Kedelapan e-book mini ini adalah materi <b>edukasi umum</b>, bukan nasihat hukum untuk kasus tertentu. Penilaian atas peristiwa nyata selalu bergantung pada fakta, konteks, dan aturan yang berlaku pada saat peristiwa terjadi. Isi halaman disusun dan diverifikasi per <b>November 2026</b>; apabila ada perubahan peraturan, halaman ini yang akan diperbarui — bukan salinan yang sudah tersebar.
+  </div>
+
+  <p class="fin">— KataPasal · Belajar hukum dari dasar, satu pasal demi satu pasal. —</p>
+</div>
+
+<script>
+function openBook(n){
+  document.getElementById('book1').classList.toggle('active', n===1);
+  document.getElementById('book2').classList.toggle('active', n===2);
+  document.getElementById('book3').classList.toggle('active', n===3);
+  document.getElementById('book4').classList.toggle('active', n===4);
+  document.getElementById('book5').classList.toggle('active', n===5);
+  document.getElementById('book6').classList.toggle('active', n===6);
+  document.getElementById('book7').classList.toggle('active', n===7);
+  document.getElementById('book8').classList.toggle('active', n===8);
+  document.getElementById('btn-book1').setAttribute('aria-selected', n===1 ? 'true':'false');
+  document.getElementById('btn-book2').setAttribute('aria-selected', n===2 ? 'true':'false');
+  document.getElementById('btn-book3').setAttribute('aria-selected', n===3 ? 'true':'false');
+  document.getElementById('btn-book4').setAttribute('aria-selected', n===4 ? 'true':'false');
+  document.getElementById('btn-book5').setAttribute('aria-selected', n===5 ? 'true':'false');
+  document.getElementById('btn-book6').setAttribute('aria-selected', n===6 ? 'true':'false');
+  document.getElementById('btn-book7').setAttribute('aria-selected', n===7 ? 'true':'false');
+  document.getElementById('btn-book8').setAttribute('aria-selected', n===8 ? 'true':'false');
+  window.scrollTo({top: document.querySelector('.shelf').offsetTop - 10, behavior:'smooth'});
+}
+var b1 = {
+  kebal:{v:'Bertentangan dengan negara hukum — tiang Persamaan runtuh.', d:'Pasal 27 ayat (1) dan 28D ayat (1) UUD 1945 menjamin kedudukan yang sama di dalam hukum tanpa kecuali. Jabatan memberi wewenang, bukan kekebalan dari pemeriksaan.'},
+  tekan:{v:'Bertentangan dengan negara hukum — tiang Peradilan Merdeka runtuh.', d:'Pasal 24 ayat (1) UUD 1945 menegaskan kekuasaan kehakiman adalah kekuasaan yang merdeka. Putusan hakim yang lahir dari tekanan kekuasaan adalah ciri negara kekuasaan, bukan negara hukum.'},
+  gugat:{v:'Inilah negara hukum yang bekerja.', d:'Warga dapat menguji tindakan pemerintah lewat peradilan, dan pemerintah tunduk pada putusannya. Kekuasaan yang bisa digugat — dan kalah — adalah bukti hukum berada di atas penguasa.'},
+  aturan:{v:'Negara hukum yang konsisten.', d:'Supremasi hukum berarti aturan mengikat semua pihak, termasuk pembuatnya. Pemerintah yang tunduk pada aturannya sendiri menunjukkan hukum, bukan orang, yang berkuasa.'}
+};
+function checkBook1(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict1').textContent = b1[key].v;
+  document.getElementById('desc1').textContent = b1[key].d;
+  document.getElementById('result1').classList.add('show');
+}
+var b2 = {
+  potong:{v:'Lensa utama: Sopan Santun.', d:'Memotong pembicaraan dinilai tidak sopan dan sanksinya sosial — ditegur, dicap, dijauhi. Tanpa aturan tertulis yang dilanggar dan tanpa unsur pasal yang terpenuhi, ia tidak berubah menjadi pelanggaran hukum hanya karena terasa menyebalkan.'},
+  advokat:{v:'Lensa utama: Etika Profesi.', d:'Advokat terikat kode etik yang disusun Organisasi Advokat (Pasal 26 ayat (1)–(2) UU Advokat). Pelanggarannya diperiksa dan diadili Dewan Kehormatan — bukan otomatis pidana. Jalur pidana baru terbuka bila perbuatannya juga mengandung unsur pidana (ayat (6)).'},
+  kantor:{v:'Lensa utama: Etika / Aturan Organisasi.', d:'Tata tertib tertulis kantor mengikat lewat hubungan kerja dan kesepakatan internal. Sanksinya sanksi organisasi — teguran sampai pemutusan hubungan kerja sesuai aturan yang berlaku — bukan sanksi negara.'},
+  tuduh:{v:'Sudah bergeser ke wilayah Hukum — wajib cek unsur.', d:'Menuduh seseorang melakukan perbuatan tertentu di depan umum bukan lagi soal sopan atau tidak sopan. Di sinilah pemeriksaan pindah ke aturan tertulis: tuduhannya apa, ditujukan ke siapa, dan apakah unsur pasal yang relevan terpenuhi. Jangan simpulkan dari rasa tersinggungnya — simpulkan dari unsurnya.'}
+};
+function checkBook2(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict2').textContent = b2[key].v;
+  document.getElementById('desc2').textContent = b2[key].d;
+  document.getElementById('result2').classList.add('show');
+}
+var b3 = {
+  tuduh:{v:'Ini wilayah pencemaran — dan bisa naik jadi fitnah.', d:'“Menggelapkan uang kas” adalah tuduhan atas suatu perbuatan konkret terhadap orang tertentu. Bila dimaksudkan supaya diketahui umum, unsurnya mengarah ke Pasal 433 KUHP, ditambah sepertiga karena lewat sarana teknologi informasi (Pasal 441 ayat (1)). Bila penuduh diberi kesempatan membuktikan dan tidak bisa, sementara tuduhannya bertentangan dengan yang ia ketahui, itu fitnah — Pasal 434. Syarat terakhirnya tetap: korban mengadu (Pasal 440), paling lambat 6 bulan (Pasal 29).'},
+  makian:{v:'Bukan pencemaran — paling jauh penghinaan ringan, itupun terbatas.', d:'SKB Pedoman Implementasi UU ITE 2021 menegaskan cacian dan kata-kata tidak pantas tanpa tuduhan fakta bukan delik pencemaran. Di KUHP baru, makian hanya bisa didekati lewat penghinaan ringan (Pasal 436) dalam bentuk tertentu: di muka umum, di hadapan orangnya, atau tulisan yang dikirim kepada orangnya. Makian di grup tertutup yang bahkan tidak dihadiri orangnya tidak otomatis masuk bentuk-bentuk itu — dan tetap butuh pengaduan korban.'},
+  kritik:{v:'Bukan delik — kritik pada dasarnya dilindungi.', d:'Kritik adalah pengawasan, koreksi, dan saran atas hal yang menyangkut kepentingan umum (Putusan MK 105/PUU-XXII/2024), dan penilaian/pendapat bukan tindak pidana menurut SKB 2021. Apalagi sasarannya instansi: lembaga, institusi, dan jabatan tidak bisa menjadi korban pencemaran — yang bisa hanya orang perseorangan. Batasnya: bila “kritik” itu menyelipkan tuduhan fakta palsu tentang seseorang, penilaiannya pindah ke unsur pencemaran/fitnah, bukan ke labelnya.'},
+  tertutup:{v:'Risikonya turun — tapi tidak otomatis aman.', d:'SKB 2021 menyatakan grup tertutup/terbatas bukan “diketahui umum”, sehingga bukan delik pencemaran; pedoman itu untuk penyidik dan statusnya setelah 2026 belum pasti. Namun PN Palu (2026) menghukum tuduhan di grup WhatsApp 13 orang yang saling kenal, karena terdakwa membuat grupnya, memilih anggotanya, dan menyebarkan tuduhan yang sama ke luar grup. Yang ditimbang pengadilan adalah niat dan fakta penyebaranmu — bukan label “closed group”.'}
+};
+function checkBook3(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict3').textContent = b3[key].v;
+  document.getElementById('desc3').textContent = b3[key].d;
+  document.getElementById('result3').classList.add('show');
+}
+var b4 = {
+  bangkrut:{v:'Ini wanprestasi — urusan perdata.', d:'Ia berniat bayar dan usahanya memang gagal; tidak ada unsur menipu sejak awal. Jalurnya teguran, kesepakatan cicilan tertulis, atau gugatan bila ia tetap mangkir (KUHPerdata Pasal 1238, 1243, 1267).'},
+  kabur:{v:'Ini wilayah penipuan — Pasal 492 KUHP.', d:'Nama palsu dan uang langsung dibawa kabur menunjukkan maksud menipu sejak awal — unsur “dengan maksud menguntungkan diri secara melawan hukum” dan cara tipu daya terpenuhi. Ancaman maksimal 4 tahun penjara atau denda Kategori V (Rp500 juta). Simpan bukti nama palsu dan aliran uangnya untuk laporan.'},
+  menghilang:{v:'Tetap perdata — menghilang bukan bukti niat menipu.', d:'Menghilang setelah berjanji memang merugikan, tapi penipuan menuntut bukti niat dan cara menipu pada saat meminjam. Tanpa bukti itu, perkaranya wanprestasi; yang perlu diperkuat adalah bukti janji bayar dan riwayat penagihan untuk teguran dan gugatan.'},
+  kecil:{v:'Tetap bisa pidana — tapi masuk penipuan ringan.', d:'Nominal kecil tidak menghapus pidana bila unsur penipuannya ada. Bila nilai yang diserahkan tidak lebih dari Rp1 juta, perbuatannya dapat masuk penipuan ringan (Pasal 494 KUHP) dengan pidana denda paling banyak Kategori II (Rp10 juta). Tetap butuh bukti niat menipu sejak awal.'}
+};
+function checkBook4(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict4').textContent = b4[key].v;
+  document.getElementById('desc4').textContent = b4[key].d;
+  document.getElementById('result4').classList.add('show');
+}
+var b5 = {
+  bebas:{v:'Tidak dipungut.', d:'Omzet setahun di bawah Rp500 juta dan syarat surat pernyataan terpenuhi.'},
+  gabungan:{v:'Dipungut 0,5%.', d:'Batas dihitung gabungan semua kanal, bukan per toko.'},
+  potongan:{v:'Itu pajakmu sendiri, bukan biaya hilang.', d:'Pelunasan PPh final atau kredit pajak di SPT.'},
+  lampaui:{v:'Perbarui surat pernyataan.', d:'Pemungutan mulai berjalan setelahnya.'}
+};
+function checkBook5(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict5').textContent = b5[key].v;
+  document.getElementById('desc5').textContent = b5[key].d;
+  document.getElementById('result5').classList.add('show');
+}
+var b6 = {
+  main:{v:'Itu rumusan Pasal 427.', d:'Ancaman sampai 3 tahun atau denda sampai Rp50 juta.'},
+  pengepul:{v:'Itu sisi penyelenggara: Pasal 426.', d:'Ancaman sampai 9 tahun / Rp2 miliar — dan pada kasus Sumenep, pengepulnya ditahan.'},
+  tidaktahan:{v:'Bukan bebas.', d:'Ancamannya di bawah 5 tahun sehingga umumnya tidak ditahan; statusnya tetap terdakwa dan proses berjalan sampai putusan.'},
+  ite:{v:'Itu kutipan ketentuan lama yang sudah dicabut.', d:'Dasar yang berlaku sekarang: Pasal 427 KUHP baru.'}
+};
+function checkBook6(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict6').textContent = b6[key].v;
+  document.getElementById('desc6').textContent = b6[key].d;
+  document.getElementById('result6').classList.add('show');
+}
+var b7 = {
+  baru:{v:'Lapor secepatnya — kecepatan adalah segalanya.', d:'Langsung hubungi bankmu lewat kanal resmi, lalu lapor ke IASC, terus buat laporan polisi. Uang hanya bisa diselamatkan kalau dananya masih ada di rekening penipu saat diblokir.'},
+  diblokir:{v:'Itu wajar — diblokir belum berarti kembali.', d:'Dari Rp967,5 miliar yang diblokir, baru Rp208,9 miliar yang kembali. Pantau lewat nomor tiketmu dan pastikan laporan polisimu sudah dibuat.'},
+  pemulihan:{v:'Jangan percaya — itu modus lanjutan.', d:'Korban hanya dihubungi resmi oleh banknya sendiri — bukan oleh IASC, bukan oleh “jasa pemulihan” apa pun. Siapa pun yang mengaku bisa mengembalikan danamu dengan imbalan adalah penipu kedua.'},
+  ragu:{v:'Laporkan saja.', d:'IASC sudah menerima 737.686 laporan — laporanmu adalah salah satu yang membuat rekening penipu itu terverifikasi dan diblokir.'}
+};
+function checkBook7(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict7').textContent = b7[key].v;
+  document.getElementById('desc7').textContent = b7[key].d;
+  document.getElementById('result7').classList.add('show');
+}
+var b8 = {
+  cacat:{v:'Tulisannya batal demi hukum (Pasal 18).', d:'Minta uang kembali atau barang pengganti, dalam 7 hari setelah transaksi (Pasal 19).'},
+  pikiran:{v:'Itu bukan dasar Pasal 19.', d:'Cek kebijakan retur toko/marketplace-nya — itu kebijakan mereka, bukan hak dari UU.'},
+  menolak:{v:'Adukan ke BPSK atau gugat ke pengadilan di kotamu (Pasal 23).', d:'Simpan struk + foto/video unboxing sebagai bukti.'},
+  kesalahan:{v:'Ganti rugi tidak berlaku.', d:'Pasal 19 ayat (5): ganti rugi tidak berlaku bila toko bisa membuktikan kesalahannya ada di konsumen.'}
+};
+function checkBook8(btn,key){
+  var wrap = btn.parentElement;
+  var all = wrap.querySelectorAll('.scen'); for(var i=0;i<all.length;i++) all[i].setAttribute('aria-pressed','false');
+  btn.setAttribute('aria-pressed','true');
+  document.getElementById('verdict8').textContent = b8[key].v;
+  document.getElementById('desc8').textContent = b8[key].d;
+  document.getElementById('result8').classList.add('show');
+}
+</script>
+</body>
+</html>
